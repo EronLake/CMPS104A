@@ -1,5 +1,5 @@
 /////////////////////////////////////////////
-//Lab0
+//Lab0.cpp
 //Eron Lake
 //ejlake@ucsc.edu
 //CMPS104A
@@ -9,11 +9,13 @@
 //include statements 
 
 #include <iostream>
+#include "myclass.h"
 
 //main function
 int main()
 {
-   //prints "Hello World"
-   std::cout << "Hello World!" << std::endl ;
-   return 0;
+	MyClass new_man;
+	//prints "Hello World"
+	new_man.print();
+	return 0;
 }

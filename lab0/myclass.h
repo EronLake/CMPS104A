@@ -8,14 +8,14 @@
 
 #include <iostream>
 
-#ifndef MYCLASS
-#define MYCLASS
+#ifndef __MYCLASS__
+#define __MYCLASS__
 
 class MyClass
 {
 	public:
-	 	std::string output;
+	 	static std::string output;
 		void print();
 };
 
-#endif MYCLASS
+#endif __MYCLASS__

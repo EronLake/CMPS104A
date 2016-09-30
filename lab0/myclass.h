@@ -18,4 +18,4 @@ class MyClass
 		void print();
 };
 
-#endif __MYCLASS__
+#endif

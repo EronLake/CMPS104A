@@ -3,7 +3,7 @@
 //Eron Lake
 //ejlake@ucsc.edu
 //CMPS104A
-//Program for introduction/refresher on c++/c
+//class for introduction/refresher on c++/c
 //////////////////////////////////////////////
 
 #include <iostream>

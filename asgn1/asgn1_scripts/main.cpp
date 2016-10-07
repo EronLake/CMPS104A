@@ -1,4 +1,10 @@
-// $Id: main.cpp,v 1.2 2016-08-18 15:13:48-07 - - $
+/////////////////////////////////////////////
+//main.cpp
+//Eron Lake
+//ejlake@ucsc.edu
+//CMPS104A
+//main program for asgn1
+//////////////////////////////////////////////
 
 #include <string>
 using namespace std;
@@ -41,12 +47,12 @@ void cpplines (FILE* pipe, char* filename) {
       char* fgets_rc = fgets (buffer, LINESIZE, pipe);
       if (fgets_rc == NULL) break;
       chomp (buffer, '\n');
-      printf ("%s:line %d: [%s]\n", filename, linenr, buffer);
+      //printf ("%s:line %d: [%s]\n", filename, linenr, buffer);
       // http://gcc.gnu.org/onlinedocs/cpp/Preprocessor-Output.html
       int sscanf_rc = sscanf (buffer, "# %d \"%[^\"]\"",
                               &linenr, filename);
       if (sscanf_rc == 2) {
-         printf ("DIRECTIVE: line %d file \"%s\"\n", linenr, filename);
+         //printf ("DIRECTIVE: line %d file \"%s\"\n", linenr, filename);
          continue;
       }
       char* savepos = NULL;
@@ -55,12 +61,17 @@ void cpplines (FILE* pipe, char* filename) {
          char* token = strtok_r (bufptr, " \t\n", &savepos);
          bufptr = NULL;
          if (token == NULL) break;
-         printf ("token %d.%d: [%s]\n",
+         /*
+         /printf ("token %d.%d: [%s]\n",
                  linenr, tokenct, token);
+         */
          //adding the tokens to the hashtable
-         const string* str = string_set::intern (token);
+         /*const string* str = string_s...*/ 
+         string_set::intern (token);
+         /*
       	printf ("intern (\"%s\") returned %p->\"%s\"\n",
               token, str, str->c_str());
+         */
       	//----------------------------------
       }
       ++linenr;
@@ -102,7 +113,6 @@ int main (int argc, char** argv) {
  		return exit_status;
    }
   	//add separtion from the two sets of input
-  	printf("--------------------------------\n");
    //-----------------------------------------------------
 
 	//for every argument on the command line
@@ -114,7 +124,11 @@ int main (int argc, char** argv) {
    }
    */
    //string_set::dump (stdout);
-   string_set::dump ("ouput.srt");
+   FILE* output_file = fopen ("output.str", "w");
+   if(output_file == NULL){perror("Error opening file");}
+   string_set::dump (output_file);
+   fclose(output_file);
+
    return EXIT_SUCCESS;
 }
 

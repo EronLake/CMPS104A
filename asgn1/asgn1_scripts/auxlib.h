@@ -1,3 +1,11 @@
+/////////////////////////////////////////////
+//auxlib.h
+//Eron Lake
+//ejlake@ucsc.edu
+//CMPS104A
+//file initializing variables and functions for debugging
+//////////////////////////////////////////////
+
 #ifndef __AUXLIB_H__
 #define __AUXLIB_H__
 

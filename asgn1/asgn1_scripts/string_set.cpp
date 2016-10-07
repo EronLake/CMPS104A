@@ -1,4 +1,10 @@
-// $Id: string_set.cpp,v 1.4 2016-09-21 16:56:20-07 - - $
+/////////////////////////////////////////////
+//string_set.cpp
+//Eron Lake
+//ejlake@ucsc.edu
+//CMPS104A
+//file declaring the string_set variables and functions
+//////////////////////////////////////////////
 
 #include <string>
 #include <unordered_set>
@@ -35,6 +41,7 @@ void string_set::dump (FILE* out) {
                   str, str->c_str());
       }
    }
+   fprintf (out, "--------------------------------------\n");
    fprintf (out, "load_factor = %.3f\n", set.load_factor());
    fprintf (out, "bucket_count = %zu\n", set.bucket_count());
    fprintf (out, "max_bucket_size = %zu\n", max_bucket_size);

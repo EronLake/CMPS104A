@@ -1,4 +1,10 @@
-// $Id: string_set.h,v 1.2 2016-08-18 15:13:48-07 - - $
+/////////////////////////////////////////////
+//string_set.h
+//Eron Lake
+//ejlake@ucsc.edu
+//CMPS104A
+//file initializing the string_set variables and functions
+//////////////////////////////////////////////
 
 #ifndef __STRING_SET__
 #define __STRING_SET__

@@ -1,3 +1,10 @@
+/////////////////////////////////////////////
+//auxlib.cpp
+//Eron Lake
+//ejlake@ucsc.edu
+//CMPS104A
+//file declaring variables and functions for debugging
+//////////////////////////////////////////////
 
 #include <assert.h>
 #include <errno.h>

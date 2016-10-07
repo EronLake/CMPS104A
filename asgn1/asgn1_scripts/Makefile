@@ -1,37 +1,32 @@
-# $Id: Makefile,v 1.13 2016-08-18 13:01:32-07 - - $
+# $Id: Makefile,v 1.4 2016-09-21 16:56:20-07 - - $
 
-GCC        = g++ -g -O0 -Wall -Wextra -std=gnu++14
-MKDEP      = g++ -MM -std=gnu++14
-VALGRIND   = valgrind --leak-check=full --show-reachable=yes
+GPP      = g++ -std=gnu++14 -g -O0 -Wall -Wextra
+MKDEP    = g++ -std=gnu++14 -MM
 
-MKFILE     = Makefile
-DEPFILE    = Makefile.dep
-SOURCES    = cppstrtok.cpp
-OBJECTS    = ${SOURCES:.cpp=.o}
-EXECBIN    = cppstrtok
-SRCFILES   = ${SOURCES} ${MKFILE}
-SMALLFILES = ${DEPFILE} foo.oc foo1.oh foo2.oh
-CHECKINS   = ${SRCFILES} ${SMALLFILES}
-LISTING    = Listing.ps
+MKFILE   = Makefile
+DEPFILE  = Makefile.dep
+SOURCES  = string_set.cpp main.cpp auxlib.cpp
+HEADERS  = string_set.h auxlib.h
+OBJECTS  = ${SOURCES:.cpp=.o}
+EXECBIN  = oc
+SRCFILES = ${HEADERS} ${SOURCES} ${MKFILE}
 
 all : ${EXECBIN}
 
 ${EXECBIN} : ${OBJECTS}
-	${GCC} -o${EXECBIN} ${OBJECTS}
+	${GPP} ${OBJECTS} -o ${EXECBIN}
 
 %.o : %.cpp
-	${GCC} -c $<
+	${GPP} -c $<
 
 ci :
-	cid + ${CHECKINS}
-	checksource ${CHECKINS}
+	cid + ${SRCFILES}
 
 clean :
-	- rm ${OBJECTS}
+	-rm ${OBJECTS} ${DEPFILE}
 
 spotless : clean
-	- rm ${EXECBIN} ${LISTING} ${LISTING:.ps=.pdf} ${DEPFILE} \
-	     test.out misc.lis
+	- rm ${EXECBIN} Listing.ps Listing.pdf test.out
 
 ${DEPFILE} :
 	${MKDEP} ${SOURCES} >${DEPFILE}
@@ -40,17 +35,13 @@ dep :
 	- rm ${DEPFILE}
 	${MAKE} --no-print-directory ${DEPFILE}
 
-include Makefile.dep
+include ${DEPFILE}
 
 test : ${EXECBIN}
-	${VALGRIND} ${EXECBIN} foo.oc 1>test.out 2>&1
+	${EXECBIN} * * * >test.out 2>&1
 
-misc.lis : ${DEPFILE} foo.oc foo1.oh foo2.oh
-	catnv ${DEPFILE} foo.oc foo1.oh foo2.oh >misc.lis
+lis : test
+	mkpspdf Listing.ps ${SRCFILES} ${DEPFILE} test.out
 
-lis : misc.lis test
-	mkpspdf ${LISTING} ${SRCFILES} misc.lis test.out
-
-again :
-	${MAKE} spotless dep all test lis
-
+again : ${SRCFILES}
+	make --no-print-directory spotless dep ci test lis

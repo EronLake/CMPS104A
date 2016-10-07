@@ -25,12 +25,14 @@ const char* get_execname (void) {
    return execname;
 }
 
+// Print the meaning of a signal.
 static void eprint_signal (const char* kind, int signal) {
    eprintf (", %s %d", kind, signal);
    const char* sigstr = strsignal (signal);
    if (sigstr != NULL) fprintf (stderr, " %s", sigstr);
 }
 
+// Print the status returned from a subprocess.
 void eprint_status (const char* command, int status) {
    if (status == 0) return; 
    eprintf ("%s: status 0x%04X", command, status);
@@ -103,7 +105,7 @@ void __stubprintf (const char* file, int line, const char* func,
    fflush (NULL);
 }     
 
-
+
 void set_debugflags (const char* flags) {
    debugflags = flags;
    if (strchr (debugflags, '@') != NULL) alldebugflags = true;

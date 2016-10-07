@@ -57,6 +57,11 @@ void cpplines (FILE* pipe, char* filename) {
          if (token == NULL) break;
          printf ("token %d.%d: [%s]\n",
                  linenr, tokenct, token);
+         //adding the tokens to the hashtable
+         const string* str = string_set::intern (token);
+      	printf ("intern (\"%s\") returned %p->\"%s\"\n",
+              token, str, str->c_str());
+      	//----------------------------------
       }
       ++linenr;
    }
@@ -64,7 +69,6 @@ void cpplines (FILE* pipe, char* filename) {
 
 int main (int argc, char** argv) {
 	//	Handles reads in argv to handle any arguments
-	
 
 
 
@@ -72,6 +76,7 @@ int main (int argc, char** argv) {
 		reads input through preproccessor
 	*/
 	//-----------------------------------------------------
+	
 	const char* execname = basename (argv[0]);
    int exit_status = EXIT_SUCCESS;
    for (int argi = 1; argi < argc; ++argi) {
@@ -101,12 +106,15 @@ int main (int argc, char** argv) {
    //-----------------------------------------------------
 
 	//for every argument on the command line
+	/*
    for (int i = 1; i < argc; ++i) {
       const string* str = string_set::intern (argv[i]);
       printf ("intern (\"%s\") returned %p->\"%s\"\n",
               argv[i], str, str->c_str());
    }
-   string_set::dump (stdout);
+   */
+   //string_set::dump (stdout);
+   string_set::dump ("ouput.srt");
    return EXIT_SUCCESS;
 }
 

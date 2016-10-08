@@ -1,0 +1,17 @@
+Help
+
+getopt()
+check()
+
+must run on unix timeshare:
+	mk.build 
+		checksource
+	mk.tests
+
+Score.asg:
+	grading rubric for assignment
+
+example08: fairly complete code for asng1
+	scan options: how to handle flags
+
+valgrind

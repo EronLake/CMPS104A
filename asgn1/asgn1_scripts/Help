@@ -15,3 +15,31 @@ example08: fairly complete code for asng1
 	scan options: how to handle flags
 
 valgrind
+
+
+ rm *oc *.err *.str *.out
+
+checksource errors:
+[ejlake@unix2 testing]$ mk.build
++ PATH=/usr/lib64/qt-3.3/bin:/afs/cats.ucsc.edu/users/d/ejlake/perl5/bin:/opt/rh/devtoolset-4/root/usr/bin:/opt/rh/rh-java-common/root/usr/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/usr/local/texlive/2012/bin/x86_64-linux:/usr/local/codebench/bin:/afs/cats.ucsc.edu/users/d/ejlake/bin:.:/afs/cats.ucsc.edu/courses/cmps012b-wm/bin
++ '[' -f PARTNER ']'
++ checksource auxlib.h string_set.h auxlib.cpp cppstrtok.cpp main.cpp string_set.cpp Makefile README
++ tee checksource.log
+checksource: improper character \x09 = ^I (tab)
+   file "main.cpp": 57 errors: lines 75, 78, 85--89, 92--93, 95--108,
+        110--113, 116--120, 132, 138--139, 142--142, 144, 147--148
+checksource: improper character \x0D = ^M (carriage return)
+   file "README": 6 errors: lines 1--6
+checksource: line length > 72 characters
+   file "main.cpp": 1 errors: line 58
+checksource: missing newline at end of line
+   file "README": 1 errors: line 7
+checksource: TOTAL COMPLAINTS: 65
++ gmake
++ tee gmake.log
+
+
+Questions:
+
+handling -D flags
+ 

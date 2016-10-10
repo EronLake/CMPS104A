@@ -94,13 +94,14 @@ int main (int argc, char** argv) {
 
 	opterr = 0;
 	for(;;) {
-  		int opt = getopt (argc, argv, "ly@");
+  		int opt = getopt (argc, argv, "ly@:D:");
   		if (opt == EOF) break;
   		switch (opt) {
   			//need to fix that functionality
-  			case '@': set_debugflags("ly"); break;
-     		case 'l':        break;
-     		case 'y':        break;
+  			case '@': set_debugflags(optarg); break;
+  			case 'D': 			break; // add it the executable string 
+     		case 'l':        	break;
+     		case 'y':        	break;
      		default:  errprintf ("bad option (%c)\n", optopt); break;
   		}
 	}

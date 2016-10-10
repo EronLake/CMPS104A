@@ -26,7 +26,7 @@ clean :
 	-rm ${OBJECTS} ${DEPFILE}
 
 spotless : clean
-	- rm ${EXECBIN} Listing.ps Listing.pdf test.out
+	- rm ${EXECBIN} Listing.ps Listing.pdf test.out *.str
 
 ${DEPFILE} :
 	${MKDEP} ${SOURCES} >${DEPFILE}

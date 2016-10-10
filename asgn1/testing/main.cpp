@@ -26,6 +26,9 @@ using namespace std;
 
 #include <wait.h>
 
+#include <unistd.h>
+
+
 const string CPP = "/usr/bin/cpp";
 constexpr size_t LINESIZE = 1024;
 
@@ -79,8 +82,35 @@ void cpplines (FILE* pipe, char* filename) {
 }
 
 int main (int argc, char** argv) {
-	//	Handles reads in argv to handle any arguments
+	//set the execname to the name of the executable "oc"
+	const char* execname = basename (argv[0]);
+	//sets execname for auxlib file
+	set_execname (argv[0]);
+	//set exit status to EXIT_SUCCESS by defualt
+   int exit_status = EXIT_SUCCESS;
 
+	//	Handles reads in argv to handle any arguments
+	//convert to scan_opts when possible
+
+	opterr = 0;
+	for(;;) {
+  		int opt = getopt (argc, argv, "ly@");
+  		if (opt == EOF) break;
+  		switch (opt) {
+  			//need to fix that functionality
+  			case '@': set_debugflags("ly"); break;
+     		case 'l':        break;
+     		case 'y':        break;
+     		default:  errprintf ("bad option (%c)\n", optopt); break;
+  		}
+	}
+	if (optind > argc) {
+  		errprintf ("Usage: %s [-ly] [filename]\n",
+                execname);
+  		exit (exit_status);
+	}
+	const char* filename = optind == argc ? "-" :argv[optind];
+	//cpp_popen (filename);
 
 
 	/*	functionality from cppstrtok.cpp
@@ -88,24 +118,23 @@ int main (int argc, char** argv) {
 	*/
 	//-----------------------------------------------------
 	
-	const char* execname = basename (argv[0]);
-   int exit_status = EXIT_SUCCESS;
-   for (int argi = 1; argi < argc; ++argi) {
-      char* filename = argv[argi];
+   //for loop allows to preprocessor to read in multiple files
+   //for (int argi = 1; argi < argc; ++argi) {
+      //char* filename = argv[argi];
       string command = CPP + " " + filename;
-      printf ("command=\"%s\"\n", command.c_str());
+      //printf ("command=\"%s\"\n", command.c_str());
       FILE* pipe = popen (command.c_str(), "r");
       if (pipe == NULL) {
          exit_status = EXIT_FAILURE;
          fprintf (stderr, "%s: %s: %s\n",
                   execname, command.c_str(), strerror (errno));
       }else {
-         cpplines (pipe, filename);
+      	//runs the preprocessor on the designated file
+         cpplines (pipe, (char*)filename);
          int pclose_rc = pclose (pipe);
          eprint_status (command.c_str(), pclose_rc);
          if (pclose_rc != 0) exit_status = EXIT_FAILURE;
       }
-   }
    /*	this code added to check if there was an error,
 		otherwise proceed with string_set function
    */
@@ -124,7 +153,13 @@ int main (int argc, char** argv) {
    }
    */
    //string_set::dump (stdout);
-   FILE* output_file = fopen ("output.str", "w");
+   //creates the output file name with the ".str" extension
+   const char* output_name =  strtok ((char*)filename,".");
+   const char* extention = ".str";
+   strcat ((char*)output_name,extention);
+
+   //dumps the output to the file output.str
+   FILE* output_file = fopen (output_name, "w");
    if(output_file == NULL){perror("Error opening file");}
    string_set::dump (output_file);
    fclose(output_file);

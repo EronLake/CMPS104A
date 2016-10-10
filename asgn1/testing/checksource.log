@@ -1,0 +1,10 @@
+checksource: improper character \x09 = ^I (tab)
+   file "main.cpp": 57 errors: lines 75, 78, 85--89, 92--93, 95--108, 
+        110--113, 116--120, 132, 138--139, 142--142, 144, 147--148
+checksource: improper character \x0D = ^M (carriage return)
+   file "README": 6 errors: lines 1--6
+checksource: line length > 72 characters
+   file "main.cpp": 1 errors: line 58
+checksource: missing newline at end of line
+   file "README": 1 errors: line 7
+checksource: TOTAL COMPLAINTS: 65

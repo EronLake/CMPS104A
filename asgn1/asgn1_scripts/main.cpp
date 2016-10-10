@@ -16,16 +16,13 @@ using namespace std;
 
 #include "string_set.h"
 #include "auxlib.h"
-
-//--------------------------4
+//--------------------------
 //import for cppstrtok.cpp
-
 
 #include <errno.h>
 #include <libgen.h>
 
 #include <wait.h>
-
 #include <unistd.h>
 
 
@@ -50,31 +47,14 @@ void cpplines (FILE* pipe, char* filename) {
       char* fgets_rc = fgets (buffer, LINESIZE, pipe);
       if (fgets_rc == NULL) break;
       chomp (buffer, '\n');
-      //printf ("%s:line %d: [%s]\n", filename, linenr, buffer);
-      // http://gcc.gnu.org/onlinedocs/cpp/Preprocessor-Output.html
-      int sscanf_rc = sscanf (buffer, "# %d \"%[^\"]\"",
-                              &linenr, filename);
-      if (sscanf_rc == 2) {
-         //printf ("DIRECTIVE: line %d file \"%s\"\n", linenr, filename);
-         continue;
-      }
       char* savepos = NULL;
       char* bufptr = buffer;
       for (int tokenct = 1;; ++tokenct) {
          char* token = strtok_r (bufptr, " \t\n", &savepos);
          bufptr = NULL;
          if (token == NULL) break;
-         /*
-         /printf ("token %d.%d: [%s]\n",
-                 linenr, tokenct, token);
-         */
          //adding the tokens to the hashtable
-         /*const string* str = string_s...*/ 
          string_set::intern (token);
-         /*
-      	printf ("intern (\"%s\") returned %p->\"%s\"\n",
-              token, str, str->c_str());
-         */
       	//----------------------------------
       }
       ++linenr;
@@ -98,7 +78,16 @@ int main (int argc, char** argv) {
   		if (opt == EOF) break;
   		switch (opt) {
   			//need to fix that functionality
-  			case '@': set_debugflags(optarg); break;
+  			case '@':
+         printf("%s",optarg);
+            if (optarg == 0){
+               printf("Error: no flag given");
+               perror("Error: no flag given");
+            }//else{
+               printf("%s",optarg);
+            //   set_debugflags(optarg); 
+               break;
+           // }
   			case 'D': 			break; // add it the executable string 
      		case 'l':        	break;
      		case 'y':        	break;
@@ -111,8 +100,6 @@ int main (int argc, char** argv) {
   		exit (exit_status);
 	}
 	const char* filename = optind == argc ? "-" :argv[optind];
-	//cpp_popen (filename);
-
 
 	/*	functionality from cppstrtok.cpp
 		reads input through preproccessor
@@ -121,9 +108,7 @@ int main (int argc, char** argv) {
 	
    //for loop allows to preprocessor to read in multiple files
    //for (int argi = 1; argi < argc; ++argi) {
-      //char* filename = argv[argi];
       string command = CPP + " " + filename;
-      //printf ("command=\"%s\"\n", command.c_str());
       FILE* pipe = popen (command.c_str(), "r");
       if (pipe == NULL) {
          exit_status = EXIT_FAILURE;
@@ -144,16 +129,6 @@ int main (int argc, char** argv) {
    }
   	//add separtion from the two sets of input
    //-----------------------------------------------------
-
-	//for every argument on the command line
-	/*
-   for (int i = 1; i < argc; ++i) {
-      const string* str = string_set::intern (argv[i]);
-      printf ("intern (\"%s\") returned %p->\"%s\"\n",
-              argv[i], str, str->c_str());
-   }
-   */
-   //string_set::dump (stdout);
    //creates the output file name with the ".str" extension
    const char* output_name =  strtok ((char*)filename,".");
    const char* extention = ".str";

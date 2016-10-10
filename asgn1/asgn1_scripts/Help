@@ -42,4 +42,5 @@ checksource: TOTAL COMPLAINTS: 65
 Questions:
 
 handling -D flags
- 
+
+valgrind --leak-check=full oc 

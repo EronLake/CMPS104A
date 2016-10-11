@@ -26,7 +26,7 @@ using namespace std;
 #include <unistd.h>
 
 
-const string CPP = "/usr/bin/cpp";
+string CPP = "/usr/bin/cpp";
 constexpr size_t LINESIZE = 1024;
 
 // Chomp the last character from a buffer if it is delim.
@@ -78,11 +78,11 @@ int main (int argc, char** argv) {
       if (opt == EOF) break;
          switch (opt) {
             //need to fix stall problem
-         case '@': set_debugflags(optarg);  break;
-         case 'D':          break; // add it the executable string 
-         case 'l':           break;
-         case 'y':           break;
-         default:  errprintf ("bad option (%c)\n", optopt); break;
+         case '@':   set_debugflags(optarg);  break;
+         case 'D':   CPP += " -D " + (string)optarg + " "; break; // add it the executable string 
+         case 'l':   break;
+         case 'y':   break;
+         default:    errprintf ("bad option (%c)\n", optopt); break;
       }
    }
    if (optind > argc) {

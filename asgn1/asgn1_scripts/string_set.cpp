@@ -41,7 +41,6 @@ void string_set::dump (FILE* out) {
                   str, str->c_str());
       }
    }
-   fprintf (out, "--------------------------------------\n");
    fprintf (out, "load_factor = %.3f\n", set.load_factor());
    fprintf (out, "bucket_count = %zu\n", set.bucket_count());
    fprintf (out, "max_bucket_size = %zu\n", max_bucket_size);

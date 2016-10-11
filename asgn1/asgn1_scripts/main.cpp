@@ -55,48 +55,48 @@ void cpplines (FILE* pipe, char* filename) {
          if (token == NULL) break;
          //adding the tokens to the hashtable
          string_set::intern (token);
-      	//----------------------------------
+         //----------------------------------
       }
       ++linenr;
    }
 }
 
 int main (int argc, char** argv) {
-	//set the execname to the name of the executable "oc"
-	const char* execname = basename (argv[0]);
-	//sets execname for auxlib file
-	set_execname (argv[0]);
-	//set exit status to EXIT_SUCCESS by defualt
+   //set the execname to the name of the executable "oc"
+   const char* execname = basename (argv[0]);
+   //sets execname for auxlib file
+   set_execname (argv[0]);
+   //set exit status to EXIT_SUCCESS by defualt
    int exit_status = EXIT_SUCCESS;
 
-	//	Handles reads in argv to handle any arguments
-	//convert to scan_opts when possible
+   //   Handles reads in argv to handle any arguments
+   //convert to scan_opts when possible
 
    opterr = 0;
-	for(;;) {
-  		int opt = getopt (argc, argv, "ly@:D:");
+   for(;;) {
+        int opt = getopt (argc, argv, "ly@:D:");
       if (opt == EOF) break;
-  		switch (opt) {
-  			//need to fix stall problem
-  			case '@': set_debugflags(optarg);  break;
-  			case 'D': 			break; // add it the executable string 
-     		case 'l':        	break;
-     		case 'y':        	break;
+         switch (opt) {
+            //need to fix stall problem
+         case '@': set_debugflags(optarg);  break;
+         case 'D':          break; // add it the executable string 
+         case 'l':           break;
+         case 'y':           break;
          default:  errprintf ("bad option (%c)\n", optopt); break;
       }
    }
    if (optind > argc) {
       errprintf ("Usage: %s [-ly] [filename]\n",
                 execname);
-  		exit (exit_status);
+        exit (exit_status);
    }
    const char* filename = optind == argc ? "-" :argv[optind];
    
-   /*	functionality from cppstrtok.cpp
+   /*   functionality from cppstrtok.cpp
       reads input through preproccessor
    */
-	//-----------------------------------------------------
-	
+   //-----------------------------------------------------
+   
    //for loop allows to preprocessor to read in multiple files
    //for (int argi = 1; argi < argc; ++argi) {
       string command = CPP + " " + filename;
@@ -112,13 +112,13 @@ int main (int argc, char** argv) {
          eprint_status (command.c_str(), pclose_rc);
          if (pclose_rc != 0) exit_status = EXIT_FAILURE;
       }
-   /*	this code added to check if there was an error,
+   /*   this code added to check if there was an error,
       otherwise proceed with string_set function
    */
    if(exit_status == EXIT_FAILURE){
       return exit_status;
    }
-  	//add separtion from the two sets of input
+     //add separtion from the two sets of input
    //-----------------------------------------------------
    //creates the output file name with the ".str" extension
    const char* output_name =  strtok ((char*)filename,".");

@@ -72,29 +72,29 @@ int main (int argc, char** argv) {
 	//	Handles reads in argv to handle any arguments
 	//convert to scan_opts when possible
 
-	opterr = 0;
+   opterr = 0;
 	for(;;) {
   		int opt = getopt (argc, argv, "ly@:D:");
-  		if (opt == EOF) break;
+      if (opt == EOF) break;
   		switch (opt) {
   			//need to fix stall problem
   			case '@': set_debugflags(optarg);  break;
   			case 'D': 			break; // add it the executable string 
      		case 'l':        	break;
      		case 'y':        	break;
-     		default:  errprintf ("bad option (%c)\n", optopt); break;
-  		}
-	}
-	if (optind > argc) {
-  		errprintf ("Usage: %s [-ly] [filename]\n",
+         default:  errprintf ("bad option (%c)\n", optopt); break;
+      }
+   }
+   if (optind > argc) {
+      errprintf ("Usage: %s [-ly] [filename]\n",
                 execname);
   		exit (exit_status);
-	}
-	const char* filename = optind == argc ? "-" :argv[optind];
-
-	/*	functionality from cppstrtok.cpp
-		reads input through preproccessor
-	*/
+   }
+   const char* filename = optind == argc ? "-" :argv[optind];
+   
+   /*	functionality from cppstrtok.cpp
+      reads input through preproccessor
+   */
 	//-----------------------------------------------------
 	
    //for loop allows to preprocessor to read in multiple files
@@ -106,17 +106,17 @@ int main (int argc, char** argv) {
          fprintf (stderr, "%s: %s: %s\n",
                   execname, command.c_str(), strerror (errno));
       }else {
-      	//runs the preprocessor on the designated file
+         //runs the preprocessor on the designated file
          cpplines (pipe, (char*)filename);
          int pclose_rc = pclose (pipe);
          eprint_status (command.c_str(), pclose_rc);
          if (pclose_rc != 0) exit_status = EXIT_FAILURE;
       }
    /*	this code added to check if there was an error,
-		otherwise proceed with string_set function
+      otherwise proceed with string_set function
    */
    if(exit_status == EXIT_FAILURE){
- 		return exit_status;
+      return exit_status;
    }
   	//add separtion from the two sets of input
    //-----------------------------------------------------

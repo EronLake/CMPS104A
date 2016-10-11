@@ -79,7 +79,7 @@ int main (int argc, char** argv) {
          switch (opt) {
             //need to fix stall problem
          case '@':   set_debugflags(optarg);  break;
-         case 'D':   CPP += " -D " + (string)optarg + " "; break; // add it the executable string 
+         case 'D':   CPP += " -D " + (string)optarg + " "; break;
          case 'l':   break;
          case 'y':   break;
          default:    errprintf ("bad option (%c)\n", optopt); break;

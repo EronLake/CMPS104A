@@ -77,17 +77,8 @@ int main (int argc, char** argv) {
   		int opt = getopt (argc, argv, "ly@:D:");
   		if (opt == EOF) break;
   		switch (opt) {
-  			//need to fix that functionality
-  			case '@':
-         printf("%s",optarg);
-            if (optarg == 0){
-               printf("Error: no flag given");
-               perror("Error: no flag given");
-            }//else{
-               printf("%s",optarg);
-            //   set_debugflags(optarg); 
-               break;
-           // }
+  			//need to fix stall problem
+  			case '@': set_debugflags(optarg);  break;
   			case 'D': 			break; // add it the executable string 
      		case 'l':        	break;
      		case 'y':        	break;

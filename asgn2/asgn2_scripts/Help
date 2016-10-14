@@ -49,3 +49,17 @@ cmps104a-wm.f16 lab0 files
 
 to check submit:
 ls -la /afs/cats.ucsc.edu/class/cmps104a-wm.f16/asg1/
+
+-------------------------------------------------------
+
+asgn2:
+
+main.cpp*
+lyutil.cpp/h
+astree.cpp/h
+string_set.cpp/h
+
+scanner.l*
+parser.y
+makefile*
+auxllib.cpp/h

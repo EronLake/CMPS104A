@@ -1,0 +1,3 @@
+# Makefile.deps created Thu, Oct 13, 2016  7:06:46 PM by make
+string_set.o: string_set.cpp string_set.h
+auxlib.o: auxlib.cpp auxlib.h

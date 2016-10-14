@@ -63,3 +63,7 @@ scanner.l*
 parser.y
 makefile*
 auxllib.cpp/h
+
+lexer.l = scanner.l:
+
+need to add the special characters and reserved words

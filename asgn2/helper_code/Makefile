@@ -6,23 +6,21 @@ NEEDINCL  = ${filter ${NOINCLUDE}, ${MAKECMDGOALS}}
 CPP       = g++ -g -O0 -Wall -Wextra -std=gnu++14
 MKDEPS    = g++ -MM -std=gnu++14
 GRIND     = valgrind --leak-check=full --show-reachable=yes
-FLEX      = flex --outfile=${CLGEN}
-BISON     = bison --defines=${HYGEN} --output=${CYGEN} --xml
+FLEX      = flex --outfile=${LEXCPP}
+BISON     = bison --defines=${PARSEHDR} --output=${PARSECPP} --xml
 XML2HTML  = xsltproc /usr/share/bison/xslt/xml2xhtml.xsl
 
-MODULES   = astree lyutils string_set auxlib
+MODULES   = astree lyutils string_set emitter auxlib
 HDRSRC    = ${MODULES:=.h}
 CPPSRC    = ${MODULES:=.cpp} main.cpp
-LSOURCES  = scanner.l
-YSOURCES  = parser.y
-HYGEN  	 = yyparse.h
-CLGEN     = yylex.cpp
-CYGEN  	 = yyparse.cpp
-LREPORT   = yylex.output
-YREPORT   = yyparse.output
-CGENS     = ${CLGEN} ${CYGEN}
-ALLGENS   = ${HYGEN} ${CGENS}
-EXECBIN   = oc
+FLEXSRC   = lexer.l
+BISONSRC  = parser.y
+PARSEHDR  = yyparse.h
+LEXCPP    = yylex.cpp
+PARSECPP  = yyparse.cpp
+CGENS     = ${LEXCPP} ${PARSECPP}
+ALLGENS   = ${PARSEHDR} ${CGENS}
+EXECBIN   = zexprsm
 ALLCSRC   = ${CPPSRC} ${CGENS}
 OBJECTS   = ${ALLCSRC:.cpp=.o}
 LEXOUT    = yylex.output
@@ -30,10 +28,10 @@ PARSEOUT  = yyparse.output
 REPORTS   = ${LEXOUT} ${PARSEOUT}
 MODSRC    = ${foreach MOD, ${MODULES}, ${MOD}.h ${MOD}.cpp}
 MISCSRC   = ${filter-out ${MODSRC}, ${HDRSRC} ${CPPSRC}}
-ALLSRC    = README ${LSOURCES} ${YSOURCES} ${MODSRC} ${MISCSRC} Makefile
+ALLSRC    = README ${FLEXSRC} ${BISONSRC} ${MODSRC} ${MISCSRC} Makefile
 TESTINS   = ${wildcard test*.in}
 EXECTEST  = ${EXECBIN} -ly
-LISTSRC   = ${ALLSRC} ${DEPSFILE} ${HYGEN}
+LISTSRC   = ${ALLSRC} ${DEPSFILE} ${PARSEHDR}
 
 all : ${EXECBIN}
 
@@ -47,12 +45,14 @@ yylex.o : yylex.cpp
 %.o : %.cpp
 	${CPP} -c $<
 
-${CLGEN} : ${LSOURCES}
-	flex --outfile=${CLGEN} ${LSOURCES} 2>${LREPORT}
-	- grep -v ’ˆ ’ ${LREPORT}
-${CYGEN} ${HYGEN} : ${YSOURCES}
-	bison --defines=${HYGEN} --output=${CYGEN} ${YSOURCES}
+${LEXCPP} : ${FLEXSRC}
+	${FLEX} ${FLEXSRC}
 
+${PARSECPP} ${PARSEHDR} : ${BISONSRC}
+	${BISON} ${BISONSRC}
+	${XML2HTML} yyparse.xml >yyparse.html
+
+
 ci : ${ALLSRC} ${TESTINS}
 	- checksource ${ALLSRC}
 	- cpplint.py.perl ${CPPSRC}

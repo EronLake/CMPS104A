@@ -16,6 +16,8 @@ using namespace std;
 
 #include "string_set.h"
 #include "auxlib.h"
+#include "astree.h"
+#include "lyutils.h"
 //--------------------------
 //import for cppstrtok.cpp
 

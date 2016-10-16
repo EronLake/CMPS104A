@@ -7,7 +7,7 @@
 #include <string.h>
 
 #include "lyutils.h"
-#include "yylex.h"
+//#include "yylex.h"
 #include "auxlib.h"
 
 bool lexer::interactive = true;

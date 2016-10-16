@@ -1,4 +1,4 @@
-// $Id: lyutils.cpp,v 1.7 2016-09-28 14:47:31-07 - - $
+// $Id: lyutils.cpp,v 1.3 2016-10-06 16:42:35-07 - - $
 
 #include <assert.h>
 #include <ctype.h>
@@ -6,9 +6,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "lyutils.h"
-#include "yylex.h"
 #include "auxlib.h"
+#include "lyutils.h"
 
 bool lexer::interactive = true;
 location lexer::lloc = {0, 1, 0};

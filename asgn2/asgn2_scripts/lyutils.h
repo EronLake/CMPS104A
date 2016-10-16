@@ -1,4 +1,4 @@
-// $Id: lyutils.h,v 1.5 2016-09-28 14:47:31-07 - - $
+// $Id: lyutils.h,v 1.4 2016-10-06 16:42:35-07 - - $
 
 #ifndef __UTILS_H__
 #define __UTILS_H__
@@ -12,10 +12,16 @@ using namespace std;
 #include <stdio.h>
 
 #include "astree.h"
+#include "auxlib.h"
 
+extern FILE* yyin;
+extern char* yytext; 
 extern int yy_flex_debug;
 extern int yydebug;
+extern size_t yyleng; 
 
+int yylex();
+int yylex_destroy();
 int yyparse();
 void yyerror (const char* message);
 

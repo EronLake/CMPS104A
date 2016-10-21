@@ -24,11 +24,12 @@
 
 LETTER          [A-Za-z_]
 DIGIT           [0-9]
-MANTISSA        ({DIGIT}+\.?{DIGIT}*|\.{DIGIT}+)
-EXPONENT        ([Ee][+-]?{DIGIT}+)
-NUMBER          ({MANTISSA}{EXPONENT}?)
-NOTNUMBER       ({MANTISSA}[Ee][+-]?)
 IDENT           ({LETTER}({LETTER}|{DIGIT})*)
+
+TOK_INTCON          ({DIGIT}+(\.?{DIGIT}*)?)
+TOK_CHARCON (’([^\\’\n]|\\[\\’"0nt])’)
+TOK_STRINGCON  (\"([^\\"\n]|\\[\\’"0nt])*\")
+
 
 %%
 
@@ -36,8 +37,7 @@ IDENT           ({LETTER}({LETTER}|{DIGIT})*)
 [ \t]+          { }
 \n              { lexer::newline(); }
 
-{NUMBER}        { RETURN (NUMBER); }
-{IDENT}         { RETURN (IDENT); }
+
 "="             { RETURN ('='); }
 "+"             { RETURN ('+'); }
 "-"             { RETURN ('-'); }
@@ -48,7 +48,41 @@ IDENT           ({LETTER}({LETTER}|{DIGIT})*)
 ")"             { RETURN (')'); }
 ";"             { RETURN (';'); }
 
-{NOTNUMBER}     { lexer::badtoken (yytext); RETURN (NUMBER); }
+"["            { RETURN ('['); }
+"]"             { RETURN (']'); }
+"{"             { RETURN ('{'); }
+"}"             { RETURN ('}'); }
+","             { RETURN (','); }
+"."             { RETURN ('.'); }
+"%"           { RETURN ('%'); }
+"!"             { RETURN ('!'); }
+"[]"             { RETURN (TOK_ARRAY); }
+
+"!="          { RETURN (TOK_NE); }
+"<="           { RETURN (TOK_LE); }
+"<"             { RETURN (TOK_LT); }
+"=="           { RETURN (TOK_EQ); }
+">="           { RETURN (TOK_GE); }
+">"             { RETURN (TOK_GT); }
+
+char          { RETURN (TOK_CHAR); }
+else           { RETURN (TOK_ELSE); }
+if             { RETURN (TOK_IF); }
+int           { RETURN (TOK_INT); }
+new           { RETURN (TOK_NEW); }
+null             { RETURN (TOK_NULL); }
+
+return          { RETURN (TOK_RETURN); }
+string           { RETURN (TOK_STRING); }
+struct             { RETURN (TOK_STRUCT); }
+void           { RETURN (TOK_VOID); }
+while           { RETURN (TOK_WHILE); }
+
+{TOK_INTCON}        { RETURN (TOK_INTCON); }
+{IDENT}         { RETURN (TOK_IDENT); }
+{TOK_CHARCON} { RETURN (TOK_CHARCON); }
+{TOK_STRINGCON}  { RETURN (TOK_STRINGCON); }
+
 .               { lexer::badchar (*yytext); }
 
 %%

@@ -67,3 +67,18 @@ auxllib.cpp/h
 lexer.l = scanner.l:
 
 need to add the special characters and reserved words
+
+what up with these?
+
+|  |  | TOK_ARRAY
+
+        |  |  |  | 
+        | TOK_ORD | TOK_CHR | TOK_ROOT
+        
+        
+        
+        
+        
+        
+        
+        

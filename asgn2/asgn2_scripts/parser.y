@@ -40,9 +40,9 @@ token   : '(' | ')' | '[' | ']' | '{' | '}' | ';' | ',' | '.'
         ;
 
 %%
-
 
-const char *get_yytname (int symbol) {
+
+const char *parser::get_tname (int symbol) {
    return yytname [YYTRANSLATE (symbol)];
 }
 

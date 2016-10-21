@@ -11,6 +11,7 @@
 #include "string_set.h"
 #include "lyutils.h"
 #include "auxlib.h"
+#include "yyparse.h"
 
 astree::astree (int symbol_, const location& lloc_, const char* info) {
    symbol = symbol_;

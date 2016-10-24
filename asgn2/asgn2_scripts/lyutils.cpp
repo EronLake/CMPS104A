@@ -13,6 +13,8 @@ bool lexer::interactive = true;
 location lexer::lloc = {0, 1, 0};
 size_t lexer::last_yyleng = 0;
 vector<string> lexer::filenames;
+//
+extern FILE* tok_output_file;
 
 astree* parser::root = nullptr;
 
@@ -67,6 +69,7 @@ void lexer::include() {
          fprintf (stderr, "--included # %zd \"%s\"\n",
                   linenr, filename);
       }
+      fprintf (tok_output_file, "#-5%zd-5%s\n", linenr, filename);
       lexer::lloc.linenr = linenr - 1;
       lexer::newfilename (filename);
    }

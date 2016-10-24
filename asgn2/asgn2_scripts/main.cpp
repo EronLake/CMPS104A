@@ -35,12 +35,14 @@ constexpr size_t LINESIZE = 1024;
 //MY_VARIABLES
 //name of file read in, declared in scan_ops
 const char* filename;
+FILE* tok_output_file;
+
 
 //////////////////////////////////////////////////////////////////
 //MY_FUNCTIONS
 //////////////////////////////////////////////////////////////////
 
-const char* make_output_name(const char* filename ,const char* extention){
+const char* mk_outname(const char* filename ,const char* extention){
    //creates the output file name with the given extension
    const char* output_name =  strtok ((char*)filename,".");
    strcat ((char*)output_name,extention);
@@ -51,17 +53,16 @@ const char* make_output_name(const char* filename ,const char* extention){
 //----------------------------------------------------------------
 void run_preproccessor(){
    //creates the output file name with the ".tok" extension
-   const char* tok_output_name = make_output_name(filename ,".tok");
+   const char* tok_output_name = mk_outname(filename ,".tok");
    
    //dumps the output to the file output.tok
-   FILE* tok_output_file = fopen (tok_output_name, "w");
+   tok_output_file = fopen (tok_output_name, "w");
    if(tok_output_file == NULL){perror("Error opening file");}
    
     //Reads in input from preprocessor
      for(;;){
         int tok = yylex();
-        parser::root = yylval;                                             //take out this line
-        astree::my_print (tok_output_file, parser::root);
+        astree::my_print (tok_output_file, yylval);
         if (tok == 0){ break;}
      } 
      
@@ -161,28 +162,8 @@ int main (int argc, char** argv) {
    //-----------------------------------------------------
    //opens input file
    cpp_popen (filename);
-   
-   
-    /*
-   string command = CPP + " " + filename;
-   //reads in input file into yyin for use in later yylex()
-   yyin   = popen (command.c_str(), "r");
-   if (yyin == NULL) {
-      exec::exit_status = EXIT_FAILURE;
-      fprintf (stderr, "%s: %s: %s\n",
-               exec::execname.c_str(), command.c_str(), strerror (errno));
-   }else {
-      if (yy_flex_debug) {
-         fprintf (stderr, "-- popen (%s), fileno(yyin) = %d\n",
-                  cpp_command.c_str(), fileno (yyin));
-      }
-      //runs the preprocessor on the designated file
-     run_preproccessor();
-   }
-   */
+    //closes input file
    cpp_pclose();
-   
-   
    
    /*   
    this code added to check if there was an error,
@@ -194,7 +175,7 @@ int main (int argc, char** argv) {
   //add separtion from the two sets of input
    //-----------------------------------------------------
    //creates the output file name with the ".str" extension
-   const char* str_output_name = make_output_name(filename ,".str");
+   const char* str_output_name = mk_outname(filename ,".str");
 
    //dumps the output to the file output.str
    FILE* str_output_file = fopen (str_output_name, "w");

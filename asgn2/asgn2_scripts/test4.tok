@@ -1,3 +1,11 @@
+#-51-5test4.oc
+#-51-5<built-in>
+#-51-5<command-line>
+#-51-5/usr/include/stdc-predef.h
+#-51-5<command-line>
+#-51-5test4.oc
+#-51-5oclib.oh
+#-526-5oclib.oh
 7    26.1    258  TOK_VOID     (void)
 7    26.6    276  TOK_IDENT    (__assert_fail)
 7    26.20   40   '('          (()
@@ -72,6 +80,7 @@
 7    36.16   276  TOK_IDENT    (status)
 7    36.22   41   ')'          ())
 7    36.23   59   ';'          (;)
+#-54-5test4.oc
 8    5.1    266  TOK_STRUCT   (struct)
 8    5.8    276  TOK_IDENT    (foo)
 8    5.12   123  '{'          ({)

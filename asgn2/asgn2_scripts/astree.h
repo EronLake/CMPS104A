@@ -31,6 +31,9 @@ struct astree {
    void dump_tree (FILE*, int depth = 0);
    static void dump (FILE* outfile, astree* tree);
    static void print (FILE* outfile, astree* tree, int depth = 0);
+   //----------------------------------------------------------------
+   //print function with specified formatting
+   static void my_print (FILE* outfile, astree* tree);
 };
 
 void destroy (astree* tree1, astree* tree2 = nullptr);

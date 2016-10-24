@@ -50,6 +50,7 @@ yylex.o : yylex.cpp
 ${CLGEN} : ${LSOURCES}
 	flex --outfile=${CLGEN} ${LSOURCES} 2>${LREPORT}
 	- grep -v ’ˆ ’ ${LREPORT}
+   
 ${CYGEN} ${HYGEN} : ${YSOURCES}
 	bison --defines=${HYGEN} --output=${CYGEN} ${YSOURCES}
 
@@ -70,7 +71,7 @@ clean :
 		${patsubst %, ${test}.%, out err log}}
 
 spotless : clean
-	- rm ${EXECBIN} List.*.ps List.*.pdf
+	- rm ${EXECBIN} List.*.ps List.*.pdf *.str *.tok
 
 deps : ${ALLCSRC}
 	@ echo "# ${DEPSFILE} created `date` by ${MAKE}" >${DEPSFILE}

@@ -78,6 +78,16 @@ void astree::print (FILE* outfile, astree* tree, int depth) {
    }
 }
 
+//---------------------------------------------------------------
+// //print function with specified formatting
+void astree::my_print (FILE* outfile, astree* tree) {
+   //fprintf (outfile, "; %s\n", lexer::filename(tree->lloc.filenr)->c_str());
+   fprintf (outfile, "%-5zd%zd.%-5zd%-5i%-13s(%s)\n",
+            tree->lloc.filenr, tree->lloc.linenr, tree->lloc.offset, 
+            tree->symbol, parser::get_tname (tree->symbol), 
+            tree->lexinfo->c_str());
+}
+
 void destroy (astree* tree1, astree* tree2) {
    if (tree1 != nullptr) delete tree1;
    if (tree2 != nullptr) delete tree2;

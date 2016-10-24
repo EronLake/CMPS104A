@@ -27,9 +27,8 @@ DIGIT           [0-9]
 IDENT           ({LETTER}({LETTER}|{DIGIT})*)
 
 TOK_INTCON          ({DIGIT}+(\.?{DIGIT}*)?)
-TOK_CHARCON (’([^\\’\n]|\\[\\’"0nt])’)
-TOK_STRINGCON  (\"([^\\"\n]|\\[\\’"0nt])*\")
-
+TOK_CHARCON       (’([^\\’\n]|\\[\\’"0nt])’)
+TOK_STRINGCON    (\"([^\\"\n]|\\[\\’"0nt])*\")
 
 %%
 

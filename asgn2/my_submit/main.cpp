@@ -3,7 +3,7 @@
 //Eron Lake
 //ejlake@ucsc.edu
 //CMPS104A
-//main program for asgn1
+//main program for asgn2
 //////////////////////////////////////////////
 
 #include <string>
@@ -16,6 +16,8 @@ using namespace std;
 
 #include "string_set.h"
 #include "auxlib.h"
+#include "astree.h"
+#include "lyutils.h"
 //--------------------------
 //import for cppstrtok.cpp
 
@@ -27,8 +29,49 @@ using namespace std;
 
 
 string CPP = "/usr/bin/cpp";
+string cpp_command;
 constexpr size_t LINESIZE = 1024;
+//-----------------------------------
+//MY_VARIABLES
+//name of file read in, declared in scan_ops
+const char* filename;
+FILE* tok_output_file;
 
+
+//////////////////////////////////////////////////////////////////
+//MY_FUNCTIONS
+//////////////////////////////////////////////////////////////////
+
+const char* mk_outname(const char* filename ,const char* extention){
+   //creates the output file name with the given extension
+   const char* output_name =  strtok ((char*)filename,".");
+   strcat ((char*)output_name,extention);
+   return output_name;
+}
+//----------------------------------------------------------------
+   
+//----------------------------------------------------------------
+void run_preproccessor(){
+   //creates the output file name with the ".tok" extension
+   const char* tok_output_name = mk_outname(filename ,".tok");
+   
+   //dumps the output to the file output.tok
+   tok_output_file = fopen (tok_output_name, "w");
+   if(tok_output_file == NULL){perror("Error opening file");}
+   
+    //Reads in input from preprocessor
+     for(;;){
+        int tok = yylex();
+        lexer::tok_dump (tok_output_file, tok);
+        if (tok == 0){ break;}
+     } 
+     fclose(tok_output_file);
+}
+
+//----------------------------------------------------------------
+//////////////////////////////////////////////////////////////////
+
+//----------------------------------------------------------------
 // Chomp the last character from a buffer if it is delim.
 void chomp (char* string, char delim) {
    size_t len = strlen (string);
@@ -37,100 +80,111 @@ void chomp (char* string, char delim) {
    if (*nlpos == delim) *nlpos = '\0';
 }
 
-// Run cpp against the lines of the file.
-void cpplines (FILE* pipe, char* filename) {
-   int linenr = 1;
-   char inputname[LINESIZE];
-   strcpy (inputname, filename);
-   for (;;) {
-      char buffer[LINESIZE];
-      char* fgets_rc = fgets (buffer, LINESIZE, pipe);
-      if (fgets_rc == NULL) break;
-      chomp (buffer, '\n');
-      char* savepos = NULL;
-      char* bufptr = buffer;
-      for (int tokenct = 1;; ++tokenct) {
-         char* token = strtok_r (bufptr, " \t\n", &savepos);
-         bufptr = NULL;
-         if (token == NULL) break;
-         //adding the tokens to the hashtable
-         string_set::intern (token);
-         //----------------------------------
+//----------------------------------------------------------------
+
+//----------------------------------------------------------------
+void cpp_popen (const char* filename) {
+    string command = CPP + " " + filename;
+   //reads in input file into yyin for use in later yylex()
+
+   int result = access(filename, R_OK);
+   yyin = popen (command.c_str(), "r");
+   if (yyin == NULL or result == -1) {
+      exec::exit_status = EXIT_FAILURE;
+      fprintf (stderr, "%s: %s: %s\n",exec::execname.c_str(), 
+                          command.c_str(), strerror (errno));
+      //exit (exec::exit_status);
+   }else {
+      if (yy_flex_debug) {
+         fprintf (stderr, "-- popen (%s), fileno(yyin) = %d\n",
+                  cpp_command.c_str(), fileno (yyin));
       }
-      ++linenr;
+      //runs the preprocessor on the designated file
+      run_preproccessor();
    }
 }
+//----------------------------------------------------------------
 
-int main (int argc, char** argv) {
-   //set the execname to the name of the executable "oc"
-   const char* execname = basename (argv[0]);
-   //sets execname for auxlib file
-   set_execname (argv[0]);
-   //set exit status to EXIT_SUCCESS by defualt
-   int exit_status = EXIT_SUCCESS;
+//----------------------------------------------------------------
+void cpp_pclose() {
+   exec::exit_status = EXIT_SUCCESS;
+   int pclose_rc = pclose (yyin);
+   eprint_status (cpp_command.c_str(), pclose_rc);
+   if (pclose_rc != 0) exec::exit_status = EXIT_FAILURE;
+}
+//----------------------------------------------------------------
 
-   //   Handles reads in argv to handle any arguments
-   //convert to scan_opts when possible
-
+//----------------------------------------------------------------
+void scan_opts (int argc, char** argv) {
+   yy_flex_debug = 0;
+   yydebug = 0;
+   lexer::interactive = isatty (fileno (stdin))
+                    and isatty (fileno (stdout));
    opterr = 0;
    for(;;) {
-        int opt = getopt (argc, argv, "ly@:D:");
+      int opt = getopt (argc, argv, "ly@:D:");
       if (opt == EOF) break;
          switch (opt) {
             //need to fix stall problem
-         case '@':   set_debugflags(optarg);  break;
-         case 'D':   CPP += " -D " + (string)optarg + " "; break;
-         case 'l':   break;
-         case 'y':   break;
-         default:    errprintf ("bad option (%c)\n", optopt); break;
+         case '@':   set_debugflags(optarg);                    break;
+         case 'D':   CPP += " -D " + (string)optarg + " ";      break;
+         case 'l':   yy_flex_debug = 1;                         break;
+         case 'y':   yydebug = 1;                               break;
+         default:    errprintf ("bad option (%c)\n", optopt);   break;
       }
    }
+
    if (optind > argc) {
       errprintf ("Usage: %s [-ly] [filename]\n",
-                execname);
-        exit (exit_status);
+                 exec::execname.c_str());
+      exit (exec::exit_status);
    }
-   const char* filename = optind == argc ? "-" :argv[optind];
-   
-   /*   functionality from cppstrtok.cpp
-      reads input through preproccessor
-   */
+   filename = optind == argc ? "-" :argv[optind];
+   //cpp_popen (filename);
+}
+//----------------------------------------------------------------
+
+
+
+//////////////////////////////////////////////////////////////////
+//----------------------------------------------------------------
+//MAIN FUNCTION
+//----------------------------------------------------------------
+//////////////////////////////////////////////////////////////////
+
+int main (int argc, char** argv) {
+   //set the execname to the name of the executable "oc"
+   exec::execname = basename (argv[0]);
+   //set exit status to EXIT_SUCCESS by defualt
+   exec::exit_status = EXIT_SUCCESS;
+
+   //   Handles reads in argv to handle any arguments
+   scan_opts (argc, argv);
    //-----------------------------------------------------
+   //opens input file
+   cpp_popen (filename);
+    //closes input file
+   cpp_pclose();
    
-   //for loop allows to preprocessor to read in multiple files
-   //for (int argi = 1; argi < argc; ++argi) {
-      string command = CPP + " " + filename;
-      FILE* pipe = popen (command.c_str(), "r");
-      if (pipe == NULL) {
-         exit_status = EXIT_FAILURE;
-         fprintf (stderr, "%s: %s: %s\n",
-                  execname, command.c_str(), strerror (errno));
-      }else {
-         //runs the preprocessor on the designated file
-         cpplines (pipe, (char*)filename);
-         int pclose_rc = pclose (pipe);
-         eprint_status (command.c_str(), pclose_rc);
-         if (pclose_rc != 0) exit_status = EXIT_FAILURE;
-      }
-   /*   this code added to check if there was an error,
-      otherwise proceed with string_set function
+   /*   
+   this code added to check if there was an error,
+   otherwise proceed with string_set function
    */
-   if(exit_status == EXIT_FAILURE){
-      return exit_status;
+   if(exec::exit_status == EXIT_FAILURE){
+   return exec::exit_status;
    }
-     //add separtion from the two sets of input
+  //add separtion from the two sets of input
    //-----------------------------------------------------
    //creates the output file name with the ".str" extension
-   const char* output_name =  strtok ((char*)filename,".");
-   const char* extention = ".str";
-   strcat ((char*)output_name,extention);
+   const char* str_output_name = mk_outname(filename ,".str");
 
    //dumps the output to the file output.str
-   FILE* output_file = fopen (output_name, "w");
-   if(output_file == NULL){perror("Error opening file");}
-   string_set::dump (output_file);
-   fclose(output_file);
-
+   FILE* str_output_file = fopen (str_output_name, "w");
+   if(str_output_file == NULL){perror("Error opening file");}
+   string_set::dump (str_output_file);
+   fclose(str_output_file);
+   //---------------------------------------------------------
+   
    return EXIT_SUCCESS;
 }
 

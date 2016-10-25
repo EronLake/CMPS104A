@@ -3,7 +3,7 @@
 //Eron Lake
 //ejlake@ucsc.edu
 //CMPS104A
-//main program for asgn1
+//main program for asgn2
 //////////////////////////////////////////////
 
 #include <string>
@@ -62,7 +62,7 @@ void run_preproccessor(){
     //Reads in input from preprocessor
      for(;;){
         int tok = yylex();
-        lexer::my_print (tok_output_file, tok);
+        lexer::tok_dump (tok_output_file, tok);
         if (tok == 0){ break;}
      } 
      fclose(tok_output_file);
@@ -86,20 +86,22 @@ void chomp (char* string, char delim) {
 void cpp_popen (const char* filename) {
     string command = CPP + " " + filename;
    //reads in input file into yyin for use in later yylex()
+
+   int result = access(filename, R_OK);
    yyin = popen (command.c_str(), "r");
-   if (yyin == NULL) {
+   if (yyin == NULL or result == -1) {
       exec::exit_status = EXIT_FAILURE;
-      fprintf (stderr, "%s: %s: %s\n",
-               exec::execname.c_str(), command.c_str(), strerror (errno));
+      fprintf (stderr, "%s: %s: %s\n",exec::execname.c_str(), 
+                          command.c_str(), strerror (errno));
+      //exit (exec::exit_status);
    }else {
       if (yy_flex_debug) {
          fprintf (stderr, "-- popen (%s), fileno(yyin) = %d\n",
                   cpp_command.c_str(), fileno (yyin));
       }
       //runs the preprocessor on the designated file
-     run_preproccessor();
+      run_preproccessor();
    }
-   //lexer::newfilename (cpp_command);
 }
 //----------------------------------------------------------------
 

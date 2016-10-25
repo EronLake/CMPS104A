@@ -37,6 +37,7 @@ struct lexer {
    static void badchar (unsigned char bad);
    static void badtoken (char* lexeme);
    static void include();
+   static void my_print(FILE* outfile, int symbol);
 };
 
 struct parser {

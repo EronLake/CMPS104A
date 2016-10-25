@@ -24,11 +24,11 @@
 
 LETTER          [A-Za-z_]
 DIGIT           [0-9]
-IDENT           ({LETTER}({LETTER}|{DIGIT})*)
+TOK_IDENT       ({LETTER}({LETTER}|{DIGIT})*)
 
-TOK_INTCON          ({DIGIT}+(\.?{DIGIT}*)?)
-TOK_CHARCON       (’([^\\’\n]|\\[\\’"0nt])’)
-TOK_STRINGCON    (\"([^\\"\n]|\\[\\’"0nt])*\")
+TOK_INTCON      ({DIGIT}+(\.?{DIGIT}*)?)
+TOK_CHARCON     (’([^\\’\n]|\\[\\’"0nt])’)
+TOK_STRINGCON   (\"([^\\"\n]|\\[\\’"0nt])*\")
 
 %%
 
@@ -47,40 +47,40 @@ TOK_STRINGCON    (\"([^\\"\n]|\\[\\’"0nt])*\")
 ")"             { RETURN (')'); }
 ";"             { RETURN (';'); }
 
-"["            { RETURN ('['); }
+"["             { RETURN ('['); }
 "]"             { RETURN (']'); }
 "{"             { RETURN ('{'); }
 "}"             { RETURN ('}'); }
 ","             { RETURN (','); }
 "."             { RETURN ('.'); }
-"%"           { RETURN ('%'); }
+"%"             { RETURN ('%'); }
 "!"             { RETURN ('!'); }
-"[]"             { RETURN (TOK_ARRAY); }
+"[]"            { RETURN (TOK_ARRAY); }
 
-"!="          { RETURN (TOK_NE); }
-"<="           { RETURN (TOK_LE); }
+"!="            { RETURN (TOK_NE); }
+"<="            { RETURN (TOK_LE); }
 "<"             { RETURN (TOK_LT); }
-"=="           { RETURN (TOK_EQ); }
-">="           { RETURN (TOK_GE); }
+"=="            { RETURN (TOK_EQ); }
+">="            { RETURN (TOK_GE); }
 ">"             { RETURN (TOK_GT); }
 
-char          { RETURN (TOK_CHAR); }
-else           { RETURN (TOK_ELSE); }
-if             { RETURN (TOK_IF); }
-int           { RETURN (TOK_INT); }
-new           { RETURN (TOK_NEW); }
-null             { RETURN (TOK_NULL); }
+char            { RETURN (TOK_CHAR); }
+else            { RETURN (TOK_ELSE); }
+if              { RETURN (TOK_IF); }
+int             { RETURN (TOK_INT); }
+new             { RETURN (TOK_NEW); }
+null            { RETURN (TOK_NULL); }
 
 return          { RETURN (TOK_RETURN); }
-string           { RETURN (TOK_STRING); }
-struct             { RETURN (TOK_STRUCT); }
-void           { RETURN (TOK_VOID); }
+string          { RETURN (TOK_STRING); }
+struct          { RETURN (TOK_STRUCT); }
+void            { RETURN (TOK_VOID); }
 while           { RETURN (TOK_WHILE); }
 
-{TOK_INTCON}        { RETURN (TOK_INTCON); }
-{IDENT}         { RETURN (TOK_IDENT); }
-{TOK_CHARCON} { RETURN (TOK_CHARCON); }
-{TOK_STRINGCON}  { RETURN (TOK_STRINGCON); }
+{TOK_INTCON}    { RETURN (TOK_INTCON); }
+{TOK_IDENT}     { RETURN (TOK_IDENT); }
+{TOK_CHARCON}   { RETURN (TOK_CHARCON); }
+{TOK_STRINGCON} { RETURN (TOK_STRINGCON); }
 
 .               { lexer::badchar (*yytext); }
 

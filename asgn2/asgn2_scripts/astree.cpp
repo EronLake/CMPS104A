@@ -82,8 +82,8 @@ void astree::print (FILE* outfile, astree* tree, int depth) {
 // //print function with specified formatting
 void astree::my_print (FILE* outfile, astree* tree) {
    //fprintf (outfile, "; %s\n", lexer::filename(tree->lloc.filenr)->c_str());
-   fprintf (outfile, "%-5zd%zd.%-5zd%-5i%-13s(%s)\n",
-            tree->lloc.filenr, tree->lloc.linenr, tree->lloc.offset, 
+   fprintf (outfile, "%-3s%-5zd%zd.%-5zd%-5i%-13s(%s)\n",
+            "",tree->lloc.filenr, tree->lloc.linenr, tree->lloc.offset, 
             tree->symbol, parser::get_tname (tree->symbol), 
             tree->lexinfo->c_str());
 }

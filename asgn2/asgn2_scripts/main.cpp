@@ -62,10 +62,9 @@ void run_preproccessor(){
     //Reads in input from preprocessor
      for(;;){
         int tok = yylex();
-        astree::my_print (tok_output_file, yylval);
+        lexer::my_print (tok_output_file, tok);
         if (tok == 0){ break;}
      } 
-     
      fclose(tok_output_file);
 }
 
@@ -87,7 +86,7 @@ void chomp (char* string, char delim) {
 void cpp_popen (const char* filename) {
     string command = CPP + " " + filename;
    //reads in input file into yyin for use in later yylex()
-   yyin   = popen (command.c_str(), "r");
+   yyin = popen (command.c_str(), "r");
    if (yyin == NULL) {
       exec::exit_status = EXIT_FAILURE;
       fprintf (stderr, "%s: %s: %s\n",
@@ -125,11 +124,11 @@ void scan_opts (int argc, char** argv) {
       if (opt == EOF) break;
          switch (opt) {
             //need to fix stall problem
-         case '@':   set_debugflags(optarg);                         break;
+         case '@':   set_debugflags(optarg);                    break;
          case 'D':   CPP += " -D " + (string)optarg + " ";      break;
-         case 'l':   yy_flex_debug = 1;                                  break;
-         case 'y':   yydebug = 1;                                          break;
-         default:    errprintf ("bad option (%c)\n", optopt);  break;
+         case 'l':   yy_flex_debug = 1;                         break;
+         case 'y':   yydebug = 1;                               break;
+         default:    errprintf ("bad option (%c)\n", optopt);   break;
       }
    }
 

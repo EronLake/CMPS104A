@@ -69,10 +69,20 @@ void lexer::include() {
          fprintf (stderr, "--included # %zd \"%s\"\n",
                   linenr, filename);
       }
-      fprintf (tok_output_file, "#-5%zd-5%s\n", linenr, filename);
+      fprintf (tok_output_file, "#%-2s%-5zd\"%-5s\"\n", "",lloc.filenr, filename);
       lexer::lloc.linenr = linenr - 1;
       lexer::newfilename (filename);
    }
+}
+
+//---------------------------------------------------------------
+// //print function with specified formatting
+void lexer::my_print (FILE* outfile, int symbol) {
+   //fprintf (outfile, "; %s\n", lexer::filename(tree->lloc.filenr)->c_str());
+   fprintf (outfile, "%-3s%-5zd%zu.%03i\t%-13s(%s)\n",
+            "", lexer::lloc.linenr, lexer::lloc.offset, 
+            symbol, parser::get_tname (symbol), 
+            yytext);
 }
 
 void yyerror (const char* message) {

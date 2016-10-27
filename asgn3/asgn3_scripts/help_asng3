@@ -1,0 +1,154 @@
+help asgn3
+
+-y flag must turn on yydbug
+
+Metegrammear are a decription of the grammar
+
+example 8
+
+TYPEID, DECID, FIELD will all be IDENTS
+
+"if" does not need a precedence
+
+example 8: how percent left and percent right precendences work
+
+parenthisis and semicolons do not need to be added to the AST
+
+int a = 3
+
+AST:
+      int
+      / \
+     a   3
+
+put i (a)
+
+      (
+     /  \
+put i    a
+
+
+using a vector to manage children is a good idea because it could handle any number of children
+using the pushback command
+
+sample provided programs
+
+if starting digit is 9 then it should crash
+anything less should be easier to pase the smaller the number is
+
+-D [name of the file guard]
+
+operators are the parents 
+operands are the children
+
+can use .size on a vector to see how many elements are in a vector
+
+smiolons will be leaf nodes in AST
+
+if(a ==b); c=d;
+
+      if
+==    ;     =
+...
+
+
+see notes:
+            FUNC
+   int      (        {
+   |        / \
+   f   int a   int b 
+   ...
+
+replace the loop with yylex
+and replace it with yyparse
+
+open the tok table before yyparse
+and close after yyparse
+
+ need to write the parser 
+
+ things like ")" "(" ";" do not need to be declared in the parser
+
+
+lowest variable declared has the highest precidence ex. "POS" and "NEG" 
+though they are not real operators
+
+%right TOK_ELSE
+
+struct:=_
+   | IF '('expr')' struct ELSE struct
+   | IF '('expr')' struct %prec ELSE (this sets the precedence to be the same as ELSE)
+
+$1, $2 $3 are macros used to decribe the arguments speccified by the grammer 
+
+ex.  expr '=' expr
+
+$$  "should be your last statement"
+
+dont use } inside the }s of the grammer
+
+the destroy functions are to free the memory
+
+the ~astree is the destructor
+
+c++ what does pop_back() do
+
+
+--------------------------------------------------------------------
+
+program -> [structdef | function | statement] ..
+
+translates to 
+
+program : program struct  $$ = $1 -> adopt ($2)
+        | program func
+        | program stmt
+        ;                 {$$ = parser:: make_root()
+
+
+block   : statemnt "}"    destroy($1) $1...
+        | ";"
+        |
+        | "{"
+
+Identdecl: basetyp 
+
+
+
+call -> I ([e[,e]..])
+
+translates to:
+
+call    :  I "(" expr )
+        |  I "("     ")"
+        |
+expr    : expr "," expr
+        | expr
+
+
+call    : callhead ')'              destroy $3 $$ = $1
+        | I "(" ")"
+
+callhead  : callhead ","  espr        destroy $2; $$ =$1 -> adopt ($3)
+          | ID       "("  expr        $$ =$2 adopt($1,$3)
+
+
+ifelse  : if (espr) stmt else str
+        | if (espr) stmt % ELSE
+        ; 
+
+
+ALMOST IDENTICAL TO CALL: THIS ONE IS CORRECT
+params  : "(" ")"
+        : paramhead ")"
+
+paramhead: paramhead "," iddentdcl
+        | "(" identdcl
+
+
+frunctions always have three children
+          Func
+      type  (   {
+
+
+      

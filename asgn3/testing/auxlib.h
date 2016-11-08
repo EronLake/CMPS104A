@@ -9,6 +9,9 @@
 #ifndef __AUXLIB_H__
 #define __AUXLIB_H__
 
+#include <string>
+using namespace std;
+
 #include <stdarg.h>
 
 //
@@ -20,25 +23,10 @@
 // Error message and exit status utility.
 //
 
-void set_execname (char* argv0);
-// Sets the program name for use by auxlib messages.
-// Must called from main before anything else is done,
-// passing in argv[0].
-
-const char* get_execname (void);
-// Returns a read-only value previously set by set_progname.
-
-void eprint_status (const char* command, int status);
-// Print the status returned by wait(2) from a subprocess.
-
-int get_exitstatus (void);
-// Returns the exit status.  Default is EXIT_SUCCESS unless
-// set_exitstatus (int) is called.  The last statement in main
-// should be:  ``return get_exitstatus();''.
-
-void set_exitstatus (int);
-// Sets the exit status.  Remebers only the largest value.
-
+struct exec {
+   static string execname;
+   static int exit_status;
+};
 
 void veprintf (const char* format, va_list args);
 // Prints a message to stderr using the vector form of 
@@ -60,6 +48,9 @@ void syserrprintf (const char* object);
 // object is the name of the object causing the problem and
 // the reason is taken from the external variable errno.
 // Sets the exit status to EXIT_FAILURE.
+
+void eprint_status (const char* command, int status);
+// Print the status returned by wait(2) from a subprocess.
 
 
 //

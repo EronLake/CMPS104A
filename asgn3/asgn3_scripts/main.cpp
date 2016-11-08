@@ -37,7 +37,6 @@ constexpr size_t LINESIZE = 1024;
 const char* filename;
 FILE* tok_output_file;
 
-
 //////////////////////////////////////////////////////////////////
 //MY_FUNCTIONS
 //////////////////////////////////////////////////////////////////
@@ -60,12 +59,8 @@ void run_preproccessor(){
    if(tok_output_file == NULL){perror("Error opening file");}
    
     //Reads in input from preprocessor
-     for(;;){
-        int tok = yylex();
-        lexer::tok_dump (tok_output_file, tok);
-        if (tok == 0){ break;}
-     } 
-     fclose(tok_output_file);
+    yyparse();
+    fclose(tok_output_file);
 }
 
 //----------------------------------------------------------------
@@ -173,7 +168,7 @@ int main (int argc, char** argv) {
    if(exec::exit_status == EXIT_FAILURE){
    return exec::exit_status;
    }
-  //add separtion from the two sets of input
+  
    //-----------------------------------------------------
    //creates the output file name with the ".str" extension
    const char* str_output_name = mk_outname(filename ,".str");
@@ -184,6 +179,20 @@ int main (int argc, char** argv) {
    string_set::dump (str_output_file);
    fclose(str_output_file);
    //---------------------------------------------------------
+
+   //-----------------------------------------------------
+   //creates the output file name with the ".str" extension
+   const char* ast_output_name = mk_outname(filename ,".ast");
+
+   //dumps the output to the file output.str
+   FILE* ast_output_file = fopen (ast_output_name, "w");
+   if(ast_output_file == NULL){perror("Error opening file");}
+   if (parser::root != NULL){
+    astree::print (ast_output_file, parser::root, 0); 
+   }
+   fclose(ast_output_file);
+   //---------------------------------------------------------
+
    
    return EXIT_SUCCESS;
 }

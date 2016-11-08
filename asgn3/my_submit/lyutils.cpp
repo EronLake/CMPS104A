@@ -84,8 +84,8 @@ void lexer::include() {
 
 //---------------------------------------------------------------
 // //print function with specified formatting
-void lexer::tok_dump (FILE* outfile, int symbol) {
-   fprintf (outfile, "%3zd%4zd.%03zd%5d  %-10s\t (%s)\n",
+void lexer::tok_dump (int symbol) {
+   fprintf (tok_output_file, "%3zd%4zd.%03zd%5d  %-10s\t (%s)\n",
             lloc.filenr,lexer::lloc.linenr, lexer::lloc.offset, 
             symbol, parser::get_tname (symbol),yytext);
 }

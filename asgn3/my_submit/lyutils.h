@@ -43,7 +43,7 @@ struct lexer {
    static void badchar (unsigned char bad);
    static void badtoken (char* lexeme);
    static void include();
-   static void tok_dump(FILE* outfile, int symbol);
+   static void tok_dump(int symbol);
 };
 
 struct parser {

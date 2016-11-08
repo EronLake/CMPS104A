@@ -1,0 +1,3 @@
+TOK_ROOT "" 0.0.0
+|  TOK_RETURN "return" 5.5.1
+|  |  TOK_IDENT "foo" 5.5.8

@@ -1,0 +1,131 @@
+TOK_ROOT "" 0.0.0
+|  TOK_VARDECL "=" 5.7.9
+|  |  TOK_ARRAY "[]" 5.7.4
+|  |  |  TOK_INT "int" 5.7.1
+|  |  |  TOK_DECLID "a" 5.7.7
+|  |  TOK_NULL "null" 5.7.11
+|  TOK_VARDECL "=" 5.8.15
+|  |  TOK_ARRAY "[]" 5.8.10
+|  |  |  TOK_TYPEID "reference" 5.8.1
+|  |  |  TOK_DECLID "a" 5.8.13
+|  |  TOK_NEWARRAY "new" 5.8.17
+|  |  |  TOK_TYPEID "string" 5.8.21
+|  |  |  TOK_INTCON "10" 5.8.28
+|  TOK_PROTOTYPE "" 5.9.1
+|  |  TOK_VOID "void" 5.9.1
+|  |  |  TOK_DECLID "foo" 5.9.6
+|  |  TOK_PARAMLIST "(" 5.9.10
+|  TOK_PROTOTYPE "" 5.10.1
+|  |  TOK_VOID "void" 5.10.1
+|  |  |  TOK_DECLID "foo" 5.10.6
+|  |  TOK_PARAMLIST "(" 5.10.10
+|  |  |  TOK_INT "int" 5.10.11
+|  |  |  |  TOK_DECLID "a" 5.10.15
+|  TOK_FUNCTION "" 5.11.1
+|  |  TOK_VOID "void" 5.11.1
+|  |  |  TOK_DECLID "foo" 5.11.6
+|  |  TOK_PARAMLIST "(" 5.11.10
+|  |  |  TOK_ARRAY "[]" 5.11.14
+|  |  |  |  TOK_INT "int" 5.11.11
+|  |  |  |  TOK_DECLID "a" 5.11.17
+|  |  |  |  TOK_ARRAY "[]" 5.11.23
+|  |  |  |   |  TOK_INT "int" 5.11.20
+|  |  |  |   |  TOK_DECLID "b" 5.11.26
+|  |  TOK_BLOCK "{" 5.11.29
+|  |  |  TOK_VARDECL "=" 5.11.36
+|  |  |  |  TOK_INT "int" 5.11.30
+|  |  |  |   |  TOK_DECLID "x" 5.11.34
+|  |  |  |  '+' "+" 5.11.40
+|  |  |  |   |  TOK_IDENT "a" 5.11.38
+|  |  |  |   |  TOK_IDENT "b" 5.11.42
+|  TOK_STRUCT "struct" 5.12.1
+|  |  TOK_TYPEID "foo" 5.12.8
+|  |  '{' "{" 5.12.12
+|  |  |  TOK_INT "int" 5.12.14
+|  |  |  |  TOK_FIELD "a" 5.12.18
+|  |  |  |  TOK_INT "int" 5.12.21
+|  |  |  |   |  TOK_FIELD "b" 5.12.25
+|  '+' "+" 5.14.3
+|  |  TOK_IDENT "a" 5.14.1
+|  |  TOK_IDENT "b" 5.14.5
+|  TOK_CALL "(" 5.15.3
+|  |  TOK_IDENT "f" 5.15.1
+|  TOK_CALL "(" 5.16.3
+|  |  TOK_IDENT "f" 5.16.1
+|  |  TOK_IDENT "x" 5.16.4
+|  |  |  '+' "+" 5.16.8
+|  |  |  |  TOK_IDENT "y" 5.16.7
+|  |  |  |  TOK_INTCON "3" 5.16.9
+|  |  |  TOK_IDENT "z" 5.16.12
+|  '+' "+" 5.17.5
+|  |  TOK_IDENT "foo" 5.17.1
+|  |  TOK_IDENT "bar" 5.17.7
+|  '=' "=" 5.18.3
+|  |  TOK_IDENT "a" 5.18.1
+|  |  '=' "=" 5.18.7
+|  |  |  TOK_IDENT "b" 5.18.5
+|  |  |  '=' "=" 5.18.11
+|  |  |  |  TOK_IDENT "c" 5.18.9
+|  |  |  |  TOK_IDENT "d" 5.18.13
+|  '=' "=" 5.19.6
+|  |  TOK_IDENT "test" 5.19.1
+|  |  '+' "+" 5.19.12
+|  |  |  TOK_IDENT "abc" 5.19.8
+|  |  |  '+' "+" 5.19.18
+|  |  |  |  TOK_IDENT "def" 5.19.14
+|  |  |  |  TOK_IDENT "ghi" 5.19.20
+|  '+' "+" 5.20.6
+|  |  TOK_IDENT "this" 5.20.1
+|  |  '*' "*" 5.20.11
+|  |  |  TOK_INTCON "23" 5.20.8
+|  |  |  '+' "+" 5.20.15
+|  |  |  |  TOK_IDENT "a" 5.20.13
+|  |  |  |  TOK_STRINGCON ""hello"" 5.20.17
+|  TOK_WHILE "while" 5.21.1
+|  |  TOK_LT "<" 5.21.10
+|  |  |  TOK_IDENT "a" 5.21.8
+|  |  |  TOK_IDENT "b" 5.21.12
+|  |  '=' "=" 5.21.17
+|  |  |  TOK_IDENT "f" 5.21.15
+|  |  |  '+' "+" 5.21.21
+|  |  |  |  TOK_IDENT "f" 5.21.19
+|  |  |  |  TOK_INTCON "1" 5.21.23
+|  TOK_RETURN "return" 5.22.1
+|  |  '+' "+" 5.22.10
+|  |  |  TOK_INTCON "3" 5.22.8
+|  |  |  TOK_INTCON "4" 5.22.12
+|  '=' "=" 5.23.6
+|  |  TOK_INDEX "[" 5.23.2
+|  |  |  TOK_IDENT "a" 5.23.1
+|  |  |  TOK_IDENT "i" 5.23.3
+|  |  TOK_INDEX "[" 5.23.9
+|  |  |  TOK_IDENT "b" 5.23.8
+|  |  |  TOK_IDENT "j" 5.23.10
+|  TOK_RETURNVOID "return" 5.24.1
+|  TOK_WHILE "while" 5.25.1
+|  |  TOK_IDENT "true" 5.25.8
+|  |  TOK_BLOCK "{" 5.25.14
+|  |  |  '=' "=" 5.25.17
+|  |  |  |  TOK_IDENT "a" 5.25.15
+|  |  |  |  TOK_INTCON "3" 5.25.19
+|  |  |  |  '=' "=" 5.25.24
+|  |  |  |   |  TOK_IDENT "b" 5.25.22
+|  |  |  |   |  TOK_INTCON "4" 5.25.26
+|  TOK_IF "if" 5.26.1
+|  |  TOK_EQ "==" 5.26.7
+|  |  |  TOK_IDENT "a" 5.26.5
+|  |  |  TOK_IDENT "b" 5.26.10
+|  |  TOK_CALL "(" 5.26.15
+|  |  |  TOK_IDENT "f" 5.26.13
+|  |  |  TOK_IDENT "x" 5.26.16
+|  TOK_IFELSE "if" 5.27.1
+|  |  TOK_NE "!=" 5.27.7
+|  |  |  TOK_IDENT "a" 5.27.5
+|  |  |  TOK_IDENT "b" 5.27.10
+|  |  '=' "=" 5.27.15
+|  |  |  TOK_IDENT "y" 5.27.13
+|  |  |  TOK_INTCON "3" 5.27.17
+|  |  TOK_CALL "(" 5.27.27
+|  |  |  TOK_IDENT "f" 5.27.25
+|  |  |  TOK_IDENT "y" 5.27.28
+|  |  |  |  TOK_IDENT "z" 5.27.31

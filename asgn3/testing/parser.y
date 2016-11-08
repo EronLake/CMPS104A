@@ -241,8 +241,8 @@ binop     : TOK_EQ              { $$ = $1; }
           | '='                 { $$ = $1; }
           ;
 
-unop      : TOK_POS             { $$ = $1; }
-          | TOK_NEG             { $$ = $1; }
+unop      : '+'                 { $$ = $1->convert_sym(TOK_POS); }
+          | '-'                 { $$ = $1->convert_sym(TOK_NEG); }
           | '!'                 { $$ = $1; }   
           | TOK_NEW             { $$ = $1; }  
           | TOK_ORD             { $$ = $1; }  

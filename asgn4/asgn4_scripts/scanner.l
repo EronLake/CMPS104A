@@ -7,7 +7,7 @@
 #define YY_USER_ACTION  { lexer::advance(); }
 
 #define RETURN(SYMBOL) { \
-   yylval = new astree (SYMBOL, lexer::lloc, yytext); \
+   yylval = new astree (SYMBOL, lexer::lloc, yytext,0,0, nullptr); \
    lexer::tok_dump (SYMBOL); \
    return SYMBOL; \
 }
@@ -36,7 +36,7 @@ TOK_STRINGCON   (\"([^\\"\n]|\\[\\'"0nt])*\")
 "#".*           { lexer::include(); }
 [ \t]+          { }
 \n              { lexer::newline(); }
-
+"//".*          {}
 
 "="             { RETURN ('='); }
 "+"             { RETURN ('+'); }

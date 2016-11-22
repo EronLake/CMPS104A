@@ -89,7 +89,8 @@ extern int yydebug;
      TOK_PROTOTYPE = 298,
      TOK_INDEX = 299,
      TOK_NEWSTRING = 300,
-     TOK_RETURNVOID = 301
+     TOK_RETURNVOID = 301,
+     TOK_THEN = 302
    };
 #endif
 

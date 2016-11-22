@@ -10,7 +10,7 @@ FLEX      = flex --outfile=${CLGEN}
 BISON     = bison --defines=${HYGEN} --output=${CYGEN} --xml
 XML2HTML  = xsltproc /usr/share/bison/xslt/xml2xhtml.xsl
 
-MODULES   = astree lyutils string_set auxlib
+MODULES   = astree lyutils string_set auxlib symtable symhelper
 HDRSRC    = ${MODULES:=.h}
 CPPSRC    = ${MODULES:=.cpp} main.cpp
 LSOURCES  = scanner.l
@@ -71,7 +71,7 @@ clean :
 		${patsubst %, ${test}.%, out err log}}
 
 spotless : clean
-	- rm ${EXECBIN} List.*.ps List.*.pdf *.str *.tok *.ast
+	- rm ${EXECBIN} List.*.ps List.*.pdf *.str *.tok *.ast *.sym
 
 deps : ${ALLCSRC}
 	@ echo "# ${DEPSFILE} created `date` by ${MAKE}" >${DEPSFILE}

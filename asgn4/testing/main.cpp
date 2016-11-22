@@ -1,4 +1,4 @@
-/////////////////////////////////////////////
+                           /////////////////////////////////////////////
 //main.cpp
 //Eron Lake
 //ejlake@ucsc.edu
@@ -18,6 +18,8 @@ using namespace std;
 #include "auxlib.h"
 #include "astree.h"
 #include "lyutils.h"
+#include "symtable.h"
+#include "symhelper.h"
 //--------------------------
 //import for cppstrtok.cpp
 
@@ -180,8 +182,27 @@ int main (int argc, char** argv) {
    fclose(str_output_file);
    //---------------------------------------------------------
 
+   //---------------------------------------------------------
+   //creates the output file name with the ".sym" extension
+   const char* sym_output_name = mk_outname(filename ,".sym");
+
+   //dumps the output to the file output.str
+   FILE* sym_output_file = fopen (sym_output_name, "w");
+   if(sym_output_file == NULL){perror("Error opening file");}
+   //traversal funcitons
+   if (parser::root != NULL){
+  //    printf("------------------------------------------------\n");
+      add_symtable();
+      symbol::sym_stack.push_back(0);
+      build_symtable (stdout, parser::root, 0);
+      traverse (stdout, parser::root, 0);
+      print_symtable (stdout, parser::root, 0);
+   }
+   fclose(sym_output_file);
+   //---------------------------------------------------------
+
    //-----------------------------------------------------
-   //creates the output file name with the ".str" extension
+   //creates the output file name with the ".ast" extension
    const char* ast_output_name = mk_outname(filename ,".ast");
 
    //dumps the output to the file output.str
@@ -192,6 +213,7 @@ int main (int argc, char** argv) {
    }
    fclose(ast_output_file);
    //---------------------------------------------------------
+  
 
    
    return EXIT_SUCCESS;

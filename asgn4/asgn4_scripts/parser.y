@@ -24,20 +24,18 @@
 %token TOK_POS TOK_NEG TOK_NEWARRAY TOK_TYPEID TOK_FIELD
 %token TOK_ORD TOK_CHR TOK_ROOT
 
-%token TOK_DECLID TOK_BINOP TOK_UNOP TOK_VARDECL TOK_PARAMLIST 
+%token TOK_DECLID TOK_BINOP TOK_UNOP TOK_VARDECL TOK_PARAMLIST
 %token TOK_FUNCTION TOK_PROTOTYPE TOK_INDEX TOK_NEWSTRING TOK_RETURNVOID
 
 
-%right TOK_IF TOK_ELSE
+%nonassoc TOK_THEN
+%left TOK_ELSE
 %right '='
-%left TOK_EQ TOK_NE TOK_LT TOK_LE TOK_GT TOK_GE
+%left '<' '>' TOK_EQ TOK_NE TOK_LE TOK_GE
 %left '+' '-'
 %left '*' '/' '%'
-%right TOK_POS TOK_NEG '!' TOK_NEW
-%left TOK_ARRAY TOK_FIELD TOK_FUNCTION
+%right '!'
 %left '[' '.'
-
-%nonassoc '('
 
 %start start
 
@@ -239,12 +237,11 @@ binop     : TOK_EQ              { $$ = $1; }
           | '/'                 { $$ = $1; }
           | '%'                 { $$ = $1; }
           | '='                 { $$ = $1; }
-          ;
+          ; 
 
-unop      : '+'                 { $$ = $1->convert_sym(TOK_POS); }
-          | '-'                 { $$ = $1->convert_sym(TOK_NEG); }
+unop      : '+' %prec TOK_POS   { $$ = $1->convert_sym(TOK_POS); }
+          | '-' %prec TOK_NEG   { $$ = $1->convert_sym(TOK_NEG); }
           | '!'                 { $$ = $1; }   
-          | TOK_NEW             { $$ = $1; }  
           | TOK_ORD             { $$ = $1; }  
           | TOK_CHR             { $$ = $1; }
           ;
@@ -252,7 +249,6 @@ unop      : '+'                 { $$ = $1->convert_sym(TOK_POS); }
 allocator : TOK_NEW TOK_IDENT '(' ')'  
                                 { 
                                   destroy($3,$4); 
-                                  $1->convert_sym(TOK_NEW);
                                   $2->convert_sym(TOK_TYPEID);
                                   $$ = $1->adopt($2); 
                                 }

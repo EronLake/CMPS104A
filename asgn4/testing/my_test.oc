@@ -1,0 +1,6 @@
+struct foo {
+   int a;
+   char b;
+   int c;
+   int c;
+}

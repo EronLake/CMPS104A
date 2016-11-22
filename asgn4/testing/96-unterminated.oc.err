@@ -10,15 +10,15 @@
 96-unterminated.oc:8:5: warning: missing terminating " character [enabled by default]
  s = "abc|\
      ^
-'ê:4.12: invalid source character (")
-'ê:4.13: invalid source character (\)
-'ê:4.14: syntax error, unexpected '*'
-'ê:4.16: invalid source character (")
-'ê:5.12: invalid source character (")
-'ê:6.10: invalid source character (')
-'ê:7.5: invalid source character (")
-'ê:7.10: invalid source character (\)
-'ê:7.11: invalid source character (")
-'ê:8.5: invalid source character (")
-'ê:8.9: invalid source character (|)
-'ê:10.5: syntax error, unexpected TOK_INTCON, expecting TOK_ARRAY or TOK_IDENT
+(«ñ:4.12: invalid source character (")
+(«ñ:4.13: invalid source character (\)
+(«ñ:4.14: syntax error, unexpected '*'
+(«ñ:4.16: invalid source character (")
+(«ñ:5.12: invalid source character (")
+(«ñ:6.10: invalid source character (')
+(«ñ:7.5: invalid source character (")
+(«ñ:7.10: invalid source character (\)
+(«ñ:7.11: invalid source character (")
+(«ñ:8.5: invalid source character (")
+(«ñ:8.9: invalid source character (|)
+(«ñ:10.5: syntax error, unexpected TOK_INTCON, expecting TOK_ARRAY or TOK_IDENT

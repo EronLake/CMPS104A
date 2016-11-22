@@ -19,10 +19,18 @@
 #include "auxlib.h"
 #include "yyparse.h"
 
-astree::astree (int symbol_, const location& lloc_, const char* info) {
+
+astree::astree (int symbol_, const location& lloc_, const char* info,
+               attr_bitset attributes_ = 0, size_t block_nr_ = 0, 
+               node_symbol* struct_node_ = nullptr) {
    symbol = symbol_;
    lloc = lloc_;
    lexinfo = string_set::intern (info);
+   //--------------------
+   attributes = attributes_;
+   struct_node = struct_node_;
+   block_nr = block_nr_;
+
    // vector defaults to empty -- no children
 }
 
@@ -85,10 +93,11 @@ void astree::print (FILE* outfile, astree* tree, int depth) {
    for (int i = 0; i < depth; i++){
       fprintf(outfile,"%*s", i, "|  ");
    }
-   fprintf (outfile, "%s \"%s\" %zd.%zd.%zd\n",
+   fprintf (outfile, "%s \"%s\" %zd.%zd.%zd {%zd} %s\n",
             parser::get_tname (tree->symbol), tree->lexinfo->c_str(),
-            tree->lloc.filenr, tree->lloc.linenr, tree->lloc.offset);
-   for (astree* child: tree->children) {
+            tree->lloc.filenr, tree->lloc.linenr, tree->lloc.offset,
+            tree->block_nr, atr_to_string(tree->attributes));
+   for (astree* child: tree->children) { 
       astree::print (outfile, child, depth + 1);
    }
 }
@@ -112,13 +121,14 @@ void errllocprintf (const location& lloc, const char* format,
 //------------------------------------------------------------------
 //creates empty tree node for end of file
 astree* new_parseroot(){
-   astree* node = new astree (TOK_ROOT,{0, 0, 0}, "");
+   astree* node = new astree (TOK_ROOT,{0, 0, 0}, "",0,0,nullptr);
    return node;
 }
 
 //------------------------------------------------------------------
 //used to synthisize TOK_FUNCTION and TOK_PROTOTYPE 
 astree* new_node(astree* node, int symbol){
-   astree* out_node = new astree (symbol,node->lloc, "");
+   astree* out_node = new astree (symbol,node->lloc, "",0,0,nullptr);
    return out_node;
 }
+

@@ -4,14 +4,16 @@ flex --outfile=yylex.cpp scanner.l 2>yylex.output
 grep -v '^ ' yylex.output
 gmake[1]: [yylex.cpp] Error 1 (ignored)
 bison --defines=yyparse.h --output=yyparse.cpp parser.y
-parser.y: conflicts: 30 shift/reduce
-g++ -MM -std=gnu++14 astree.cpp lyutils.cpp string_set.cpp auxlib.cpp main.cpp yylex.cpp yyparse.cpp >>Makefile.deps
+parser.y: conflicts: 29 shift/reduce
+g++ -MM -std=gnu++14 astree.cpp lyutils.cpp string_set.cpp auxlib.cpp symtable.cpp symhelper.cpp main.cpp yylex.cpp yyparse.cpp >>Makefile.deps
 g++ -g -O0 -Wall -Wextra -std=gnu++14 -c astree.cpp
 g++ -g -O0 -Wall -Wextra -std=gnu++14 -c lyutils.cpp
 g++ -g -O0 -Wall -Wextra -std=gnu++14 -c string_set.cpp
 g++ -g -O0 -Wall -Wextra -std=gnu++14 -c auxlib.cpp
+g++ -g -O0 -Wall -Wextra -std=gnu++14 -c symtable.cpp
+g++ -g -O0 -Wall -Wextra -std=gnu++14 -c symhelper.cpp
 g++ -g -O0 -Wall -Wextra -std=gnu++14 -c main.cpp
 # Suppress warning message from flex compilation.
 g++ -g -O0 -Wall -Wextra -std=gnu++14 -Wno-sign-compare -c yylex.cpp
 g++ -g -O0 -Wall -Wextra -std=gnu++14 -c yyparse.cpp
-g++ -g -O0 -Wall -Wextra -std=gnu++14 -ooc astree.o lyutils.o string_set.o auxlib.o main.o yylex.o yyparse.o
+g++ -g -O0 -Wall -Wextra -std=gnu++14 -ooc astree.o lyutils.o string_set.o auxlib.o symtable.o symhelper.o main.o yylex.o yyparse.o

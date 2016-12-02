@@ -1,0 +1,253 @@
+TOK_ROOT "" 0.0.0 {0} 
+|  TOK_PROTOTYPE "" 7.27.1 {0} 
+|  |  TOK_VOID "void" 7.27.1 {0} 
+|  |  |  TOK_DECLID "__assert_fail" 7.27.6 {0} 
+|  |  TOK_PARAMLIST "(" 7.27.20 {0} 
+|  |  |  TOK_STRING "string" 7.27.21 {0} 
+|  |  |  |  TOK_DECLID "expr" 7.27.28 {0} 
+|  |  |  |  TOK_STRING "string" 7.27.34 {0} 
+|  |  |  |   |  TOK_DECLID "file" 7.27.41 {0} 
+|  |  |  |  TOK_INT "int" 7.27.47 {0} 
+|  |  |  |   |  TOK_DECLID "line" 7.27.51 {0} 
+|  TOK_PROTOTYPE "" 7.28.1 {0} 
+|  |  TOK_VOID "void" 7.28.1 {0} 
+|  |  |  TOK_DECLID "putb" 7.28.6 {0} 
+|  |  TOK_PARAMLIST "(" 7.28.11 {0} 
+|  |  |  TOK_INT "int" 7.28.12 {0} 
+|  |  |  |  TOK_DECLID "b" 7.28.16 {0} 
+|  TOK_PROTOTYPE "" 7.29.1 {0} 
+|  |  TOK_VOID "void" 7.29.1 {0} 
+|  |  |  TOK_DECLID "putc" 7.29.6 {0} 
+|  |  TOK_PARAMLIST "(" 7.29.11 {0} 
+|  |  |  TOK_INT "int" 7.29.12 {0} 
+|  |  |  |  TOK_DECLID "c" 7.29.16 {0} 
+|  TOK_PROTOTYPE "" 7.30.1 {0} 
+|  |  TOK_VOID "void" 7.30.1 {0} 
+|  |  |  TOK_DECLID "puti" 7.30.6 {0} 
+|  |  TOK_PARAMLIST "(" 7.30.11 {0} 
+|  |  |  TOK_INT "int" 7.30.12 {0} 
+|  |  |  |  TOK_DECLID "i" 7.30.16 {0} 
+|  TOK_PROTOTYPE "" 7.31.1 {0} 
+|  |  TOK_VOID "void" 7.31.1 {0} 
+|  |  |  TOK_DECLID "puts" 7.31.6 {0} 
+|  |  TOK_PARAMLIST "(" 7.31.11 {0} 
+|  |  |  TOK_STRING "string" 7.31.12 {0} 
+|  |  |  |  TOK_DECLID "s" 7.31.19 {0} 
+|  TOK_PROTOTYPE "" 7.32.1 {0} 
+|  |  TOK_VOID "void" 7.32.1 {0} 
+|  |  |  TOK_DECLID "endl" 7.32.6 {0} 
+|  |  TOK_PARAMLIST "(" 7.32.11 {0} 
+|  TOK_PROTOTYPE "" 7.33.1 {0} 
+|  |  TOK_INT "int" 7.33.1 {0} 
+|  |  |  TOK_DECLID "getc" 7.33.5 {0} 
+|  |  TOK_PARAMLIST "(" 7.33.10 {0} 
+|  TOK_PROTOTYPE "" 7.34.1 {0} 
+|  |  TOK_STRING "string" 7.34.1 {0} 
+|  |  |  TOK_DECLID "getw" 7.34.8 {0} 
+|  |  TOK_PARAMLIST "(" 7.34.13 {0} 
+|  TOK_PROTOTYPE "" 7.35.1 {0} 
+|  |  TOK_STRING "string" 7.35.1 {0} 
+|  |  |  TOK_DECLID "getln" 7.35.8 {0} 
+|  |  TOK_PARAMLIST "(" 7.35.14 {0} 
+|  TOK_PROTOTYPE "" 7.36.7 {0} 
+|  |  TOK_ARRAY "[]" 7.36.7 {0} 
+|  |  |  TOK_STRING "string" 7.36.1 {0} 
+|  |  |  TOK_DECLID "getargv" 7.36.10 {0} 
+|  |  TOK_PARAMLIST "(" 7.36.18 {0} 
+|  TOK_PROTOTYPE "" 7.37.1 {0} 
+|  |  TOK_VOID "void" 7.37.1 {0} 
+|  |  |  TOK_DECLID "exit" 7.37.6 {0} 
+|  |  TOK_PARAMLIST "(" 7.37.11 {0} 
+|  |  |  TOK_INT "int" 7.37.12 {0} 
+|  |  |  |  TOK_DECLID "status" 7.37.16 {0} 
+|  TOK_STRUCT "struct" 8.7.1 {0} 
+|  |  TOK_TYPEID "stack" 8.7.8 {0} 
+|  |  '{' "{" 8.7.14 {0} 
+|  |  |  TOK_ARRAY "[]" 8.8.10 {0} 
+|  |  |  |  TOK_STRING "string" 8.8.4 {0} 
+|  |  |  |  TOK_FIELD "data" 8.8.13 {0} 
+|  |  |  |  TOK_INT "int" 8.9.4 {0} 
+|  |  |  |   |  TOK_FIELD "size" 8.9.8 {0} 
+|  |  |  |  TOK_INT "int" 8.10.4 {0} 
+|  |  |  |   |  TOK_FIELD "top" 8.10.8 {0} 
+|  TOK_FUNCTION "" 8.13.1 {0} 
+|  |  TOK_TYPEID "stack" 8.13.1 {0} 
+|  |  |  TOK_DECLID "new_stack" 8.13.7 {0} 
+|  |  TOK_PARAMLIST "(" 8.13.17 {0} 
+|  |  |  TOK_INT "int" 8.13.18 {0} 
+|  |  |  |  TOK_DECLID "size" 8.13.22 {0} 
+|  |  TOK_BLOCK "{" 8.13.28 {0} 
+|  |  |  TOK_VARDECL "=" 8.14.16 {0} 
+|  |  |  |  TOK_TYPEID "stack" 8.14.4 {0} 
+|  |  |  |   |  TOK_DECLID "stack" 8.14.10 {0} 
+|  |  |  |  TOK_NEW "new" 8.14.18 {0} 
+|  |  |  |   |  TOK_TYPEID "stack" 8.14.22 {0} 
+|  |  |  |  '=' "=" 8.15.15 {0} 
+|  |  |  |   |  '.' "." 8.15.9 {0} 
+|  |  |  |   |    |  TOK_IDENT "stack" 8.15.4 {0} 
+|  |  |  |   |    |  TOK_FIELD "data" 8.15.10 {0} 
+|  |  |  |   |  TOK_NEWARRAY "new" 8.15.17 {0} 
+|  |  |  |   |    |  TOK_TYPEID "string" 8.15.21 {0} 
+|  |  |  |   |    |  TOK_IDENT "size" 8.15.28 {0} 
+|  |  |  |  '=' "=" 8.16.15 {0} 
+|  |  |  |   |  '.' "." 8.16.9 {0} 
+|  |  |  |   |    |  TOK_IDENT "stack" 8.16.4 {0} 
+|  |  |  |   |    |  TOK_FIELD "size" 8.16.10 {0} 
+|  |  |  |   |  TOK_IDENT "size" 8.16.17 {0} 
+|  |  |  |  '=' "=" 8.17.14 {0} 
+|  |  |  |   |  '.' "." 8.17.9 {0} 
+|  |  |  |   |    |  TOK_IDENT "stack" 8.17.4 {0} 
+|  |  |  |   |    |  TOK_FIELD "top" 8.17.10 {0} 
+|  |  |  |   |  TOK_NEG "-" 8.17.17 {0} 
+|  |  |  |   |    |  TOK_INTCON "1" 8.17.18 {0} 
+|  |  |  |  TOK_RETURN "return" 8.18.4 {0} 
+|  |  |  |   |  TOK_IDENT "stack" 8.18.11 {0} 
+|  TOK_FUNCTION "" 8.21.1 {0} 
+|  |  TOK_VOID "void" 8.21.1 {0} 
+|  |  |  TOK_DECLID "push" 8.21.6 {0} 
+|  |  TOK_PARAMLIST "(" 8.21.11 {0} 
+|  |  |  TOK_TYPEID "stack" 8.21.12 {0} 
+|  |  |  |  TOK_DECLID "stack" 8.21.18 {0} 
+|  |  |  |  TOK_STRING "string" 8.21.25 {0} 
+|  |  |  |   |  TOK_DECLID "str" 8.21.32 {0} 
+|  |  TOK_BLOCK "{" 8.21.37 {0} 
+|  |  |  TOK_BLOCK "{" 8.22.4 {0} 
+|  |  |  |  TOK_IF "if" 8.22.5 {0} 
+|  |  |  |   |  '!' "!" 8.22.9 {0} 
+|  |  |  |   |    |  TOK_LT "<" 8.22.21 {0} 
+|  |  |  |   |    |     |  '.' "." 8.22.16 {0} 
+|  |  |  |   |    |     |      |  TOK_IDENT "stack" 8.22.11 {0} 
+|  |  |  |   |    |     |      |  TOK_FIELD "top" 8.22.17 {0} 
+|  |  |  |   |    |     |  '-' "-" 8.22.34 {0} 
+|  |  |  |   |    |     |      |  '.' "." 8.22.28 {0} 
+|  |  |  |   |    |     |      |       |  TOK_IDENT "stack" 8.22.23 {0} 
+|  |  |  |   |    |     |      |       |  TOK_FIELD "size" 8.22.29 {0} 
+|  |  |  |   |    |     |      |  TOK_INTCON "1" 8.22.36 {0} 
+|  |  |  |   |  TOK_CALL "(" 8.22.54 {0} 
+|  |  |  |   |    |  TOK_IDENT "__assert_fail" 8.22.40 {0} 
+|  |  |  |   |    |  TOK_STRINGCON ""stack.top < stack.size - 1"" 8.22.55 {0} 
+|  |  |  |   |    |     |  TOK_STRINGCON ""40-arraystack.oc"" 8.22.85 {0} 
+|  |  |  |   |    |     |  TOK_INTCON "22" 8.22.105 {0} 
+|  |  |  |  ';' ";" 8.22.110 {0} 
+|  |  |  |  '=' "=" 8.23.14 {0} 
+|  |  |  |   |  '.' "." 8.23.9 {0} 
+|  |  |  |   |    |  TOK_IDENT "stack" 8.23.4 {0} 
+|  |  |  |   |    |  TOK_FIELD "top" 8.23.10 {0} 
+|  |  |  |   |  '+' "+" 8.23.26 {0} 
+|  |  |  |   |    |  '.' "." 8.23.21 {0} 
+|  |  |  |   |    |     |  TOK_IDENT "stack" 8.23.16 {0} 
+|  |  |  |   |    |     |  TOK_FIELD "top" 8.23.22 {0} 
+|  |  |  |   |    |  TOK_INTCON "1" 8.23.28 {0} 
+|  |  |  |  '=' "=" 8.24.26 {0} 
+|  |  |  |   |  TOK_INDEX "[" 8.24.14 {0} 
+|  |  |  |   |    |  '.' "." 8.24.9 {0} 
+|  |  |  |   |    |     |  TOK_IDENT "stack" 8.24.4 {0} 
+|  |  |  |   |    |     |  TOK_FIELD "data" 8.24.10 {0} 
+|  |  |  |   |    |  '.' "." 8.24.20 {0} 
+|  |  |  |   |    |     |  TOK_IDENT "stack" 8.24.15 {0} 
+|  |  |  |   |    |     |  TOK_FIELD "top" 8.24.21 {0} 
+|  |  |  |   |  TOK_IDENT "str" 8.24.28 {0} 
+|  TOK_FUNCTION "" 8.27.1 {0} 
+|  |  TOK_STRING "string" 8.27.1 {0} 
+|  |  |  TOK_DECLID "pop" 8.27.8 {0} 
+|  |  TOK_PARAMLIST "(" 8.27.12 {0} 
+|  |  |  TOK_TYPEID "stack" 8.27.13 {0} 
+|  |  |  |  TOK_DECLID "stack" 8.27.19 {0} 
+|  |  TOK_BLOCK "{" 8.27.26 {0} 
+|  |  |  TOK_BLOCK "{" 8.28.4 {0} 
+|  |  |  |  TOK_IF "if" 8.28.5 {0} 
+|  |  |  |   |  '!' "!" 8.28.9 {0} 
+|  |  |  |   |    |  TOK_NE "!=" 8.28.21 {0} 
+|  |  |  |   |    |     |  '.' "." 8.28.16 {0} 
+|  |  |  |   |    |     |      |  TOK_IDENT "stack" 8.28.11 {0} 
+|  |  |  |   |    |     |      |  TOK_FIELD "top" 8.28.17 {0} 
+|  |  |  |   |    |     |  TOK_NEG "-" 8.28.25 {0} 
+|  |  |  |   |    |     |      |  TOK_INTCON "1" 8.28.26 {0} 
+|  |  |  |   |  TOK_CALL "(" 8.28.45 {0} 
+|  |  |  |   |    |  TOK_IDENT "__assert_fail" 8.28.31 {0} 
+|  |  |  |   |    |  TOK_STRINGCON ""stack.top != EMPTY"" 8.28.46 {0} 
+|  |  |  |   |    |     |  TOK_STRINGCON ""40-arraystack.oc"" 8.28.68 {0} 
+|  |  |  |   |    |     |  TOK_INTCON "28" 8.28.88 {0} 
+|  |  |  |  ';' ";" 8.28.93 {0} 
+|  |  |  |  TOK_VARDECL "=" 8.29.15 {0} 
+|  |  |  |   |  TOK_STRING "string" 8.29.4 {0} 
+|  |  |  |   |    |  TOK_DECLID "tmp" 8.29.11 {0} 
+|  |  |  |   |  TOK_INDEX "[" 8.29.27 {0} 
+|  |  |  |   |    |  '.' "." 8.29.22 {0} 
+|  |  |  |   |    |     |  TOK_IDENT "stack" 8.29.17 {0} 
+|  |  |  |   |    |     |  TOK_FIELD "data" 8.29.23 {0} 
+|  |  |  |   |    |  '.' "." 8.29.33 {0} 
+|  |  |  |   |    |     |  TOK_IDENT "stack" 8.29.28 {0} 
+|  |  |  |   |    |     |  TOK_FIELD "top" 8.29.34 {0} 
+|  |  |  |  '=' "=" 8.30.14 {0} 
+|  |  |  |   |  '.' "." 8.30.9 {0} 
+|  |  |  |   |    |  TOK_IDENT "stack" 8.30.4 {0} 
+|  |  |  |   |    |  TOK_FIELD "top" 8.30.10 {0} 
+|  |  |  |   |  '-' "-" 8.30.26 {0} 
+|  |  |  |   |    |  '.' "." 8.30.21 {0} 
+|  |  |  |   |    |     |  TOK_IDENT "stack" 8.30.16 {0} 
+|  |  |  |   |    |     |  TOK_FIELD "top" 8.30.22 {0} 
+|  |  |  |   |    |  TOK_INTCON "1" 8.30.28 {0} 
+|  |  |  |  TOK_RETURN "return" 8.31.4 {0} 
+|  |  |  |   |  TOK_IDENT "tmp" 8.31.11 {0} 
+|  TOK_FUNCTION "" 8.34.1 {0} 
+|  |  TOK_INT "int" 8.34.1 {0} 
+|  |  |  TOK_DECLID "empty" 8.34.5 {0} 
+|  |  TOK_PARAMLIST "(" 8.34.11 {0} 
+|  |  |  TOK_TYPEID "stack" 8.34.12 {0} 
+|  |  |  |  TOK_DECLID "stack" 8.34.18 {0} 
+|  |  TOK_BLOCK "{" 8.34.25 {0} 
+|  |  |  TOK_RETURN "return" 8.35.4 {0} 
+|  |  |  |  TOK_EQ "==" 8.35.21 {0} 
+|  |  |  |   |  '.' "." 8.35.16 {0} 
+|  |  |  |   |    |  TOK_IDENT "stack" 8.35.11 {0} 
+|  |  |  |   |    |  TOK_FIELD "top" 8.35.17 {0} 
+|  |  |  |   |  TOK_NEG "-" 8.35.25 {0} 
+|  |  |  |   |    |  TOK_INTCON "1" 8.35.26 {0} 
+|  TOK_VARDECL "=" 8.39.15 {0} 
+|  |  TOK_ARRAY "[]" 8.39.7 {0} 
+|  |  |  TOK_STRING "string" 8.39.1 {0} 
+|  |  |  TOK_DECLID "argv" 8.39.10 {0} 
+|  |  TOK_CALL "(" 8.39.25 {0} 
+|  |  |  TOK_IDENT "getargv" 8.39.17 {0} 
+|  TOK_VARDECL "=" 8.40.13 {0} 
+|  |  TOK_TYPEID "stack" 8.40.1 {0} 
+|  |  |  TOK_DECLID "stack" 8.40.7 {0} 
+|  |  TOK_CALL "(" 8.40.25 {0} 
+|  |  |  TOK_IDENT "new_stack" 8.40.15 {0} 
+|  |  |  TOK_INTCON "100" 8.40.26 {0} 
+|  TOK_VARDECL "=" 8.42.10 {0} 
+|  |  TOK_INT "int" 8.42.1 {0} 
+|  |  |  TOK_DECLID "argi" 8.42.5 {0} 
+|  |  TOK_INTCON "0" 8.42.12 {0} 
+|  TOK_WHILE "while" 8.43.1 {0} 
+|  |  TOK_NE "!=" 8.43.19 {0} 
+|  |  |  TOK_INDEX "[" 8.43.12 {0} 
+|  |  |  |  TOK_IDENT "argv" 8.43.8 {0} 
+|  |  |  |  TOK_IDENT "argi" 8.43.13 {0} 
+|  |  |  TOK_NULL "null" 8.43.22 {0} 
+|  |  TOK_BLOCK "{" 8.43.28 {0} 
+|  |  |  TOK_CALL "(" 8.44.9 {0} 
+|  |  |  |  TOK_IDENT "push" 8.44.4 {0} 
+|  |  |  |  TOK_IDENT "stack" 8.44.10 {0} 
+|  |  |  |   |  TOK_INDEX "[" 8.44.21 {0} 
+|  |  |  |   |    |  TOK_IDENT "argv" 8.44.17 {0} 
+|  |  |  |   |    |  TOK_IDENT "argi" 8.44.22 {0} 
+|  |  |  |  '=' "=" 8.45.9 {0} 
+|  |  |  |   |  TOK_IDENT "argi" 8.45.4 {0} 
+|  |  |  |   |  '+' "+" 8.45.16 {0} 
+|  |  |  |   |    |  TOK_IDENT "argi" 8.45.11 {0} 
+|  |  |  |   |    |  TOK_INTCON "1" 8.45.18 {0} 
+|  TOK_WHILE "while" 8.48.1 {0} 
+|  |  '!' "!" 8.48.8 {0} 
+|  |  |  TOK_CALL "(" 8.48.16 {0} 
+|  |  |  |  TOK_IDENT "empty" 8.48.10 {0} 
+|  |  |  |  TOK_IDENT "stack" 8.48.17 {0} 
+|  |  TOK_BLOCK "{" 8.48.25 {0} 
+|  |  |  TOK_CALL "(" 8.49.9 {0} 
+|  |  |  |  TOK_IDENT "puts" 8.49.4 {0} 
+|  |  |  |  TOK_CALL "(" 8.49.14 {0} 
+|  |  |  |   |  TOK_IDENT "pop" 8.49.10 {0} 
+|  |  |  |   |  TOK_IDENT "stack" 8.49.15 {0} 
+|  |  |  |  TOK_CALL "(" 8.50.9 {0} 
+|  |  |  |   |  TOK_IDENT "endl" 8.50.4 {0} 

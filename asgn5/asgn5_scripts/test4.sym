@@ -1,0 +1,13 @@
+__assert_fail (7.27.1) {0} function 
+      putb (7.28.1) {0} function 
+  putc (7.29.1) {0} function 
+  puti (7.30.1) {0} function 
+  puts (7.31.1) {0} function 
+  endl (7.32.1) {0} function 
+getc (7.33.1) {0} int function 
+getw (7.34.1) {0} string function 
+getln (7.35.1) {0} string function 
+string (7.36.1) {0} string array function 
+getargv (7.36.7) {0} string array lval 
+exit (7.37.1) {0} function 
+  

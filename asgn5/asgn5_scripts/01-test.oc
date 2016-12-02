@@ -1,0 +1,5 @@
+// Simple hello world program.
+
+#include "oclib.oh"
+
+int a = 1;
